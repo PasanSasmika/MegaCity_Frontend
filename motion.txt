@@ -1,0 +1,103 @@
+ <div className='w-full h-screen flex flex-col gap-3'>
+
+      {/* <motion.div initial={{
+        fontSize: "14px"
+        }}
+        animate={{
+          fontSize: "33px"
+        }}
+        
+        > Hello WOrld</motion.div>
+
+        <motion.div className='w-32 h-32 bg-blue-600' initial={{
+          opacity: 0 }}
+
+          animate={{
+            opacity: 2
+          }}
+          transition={{
+            delay: 0.5,
+            duration: 1.7
+          }}
+          >
+
+        </motion.div> */}
+
+        {/* <motion.div className='w-32 h-32 bg-red-600' initial={{
+         x: 0
+         }}
+
+          animate={{
+            x: 0
+          }}
+
+          transition={{
+            delay: 0.5
+          }}
+          >
+
+        </motion.div> */}
+ 
+        {/* <motion.div className='w-32 h-32 bg-red-400' initial={{
+         y: 300
+         }}
+
+          animate={{
+            y: 0
+          }}
+
+          transition={{
+            delay: 0.5,
+            duration: 1.2
+          }}
+          >
+
+        </motion.div>  */}
+        
+          <motion.div  drag={{}} whileDrag={{
+            
+            rotate: 40
+          }} className='w-32 h-32 bg-red-600' 
+
+          animate={{
+            y: [300,500,200]
+          }}
+
+          // transition={{
+          //   delay: 0.5,
+          //   duration: 1.2,
+          //   type: 'spring',
+          //   stiffness: 150,
+          //   damping: 20, // little bit bounce    
+          //   // type "tween" smoothly normal 
+          // }}
+          >
+
+        </motion.div> 
+
+     
+{/* 
+         <button onClick={()=> setClicked(!clicked)}>Clicked</button>
+        <AnimatePresence>
+{clicked &&(
+<motion.div className='w-32 h-32 bg-red-400'
+
+          animate={{
+            x: 500,
+          }}
+
+          transition={{
+            delay: 0.5,
+            duration: 1.2
+          }}
+
+          exit={{
+            x:0,
+            opacity:0
+          }}
+          >
+
+        </motion.div>
+        )}
+        </AnimatePresence>  */}
+    </div>
