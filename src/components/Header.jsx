@@ -2,6 +2,7 @@ import React from 'react'
 import logo from '/Group 2.svg'
 import { IoCall, IoLocation, IoMail } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
+import { FaRegUser } from 'react-icons/fa'
 
 
 function Header() {
@@ -33,15 +34,13 @@ function Header() {
         <a href='#contact' className='text-slate-900 hover:text-primary'>Contact</a>
         <Link to={"/driver"} className="text-slate-900 hover:text-primary">Become a Driver</Link>
         <a href='#contact' className='text-slate-900 hover:text-primary'>Contact</a>
-      <Link to="/login"><a href='#contact' className='text-slate-900 hover:text-primary'>Login</a></Link>  
-
       </nav>
       
       </div>
       <Link to={"/ride"}><div className='w-52 h-14 flex justify-center items-center mr-10 rounded-lg font-secondery text-[17px]  bg-primary hover:bg-slate-900 hover:text-primary'>
       <button>Let's Ride now !</button>
       </div></Link>
-      
+      <Link to="/login"><FaRegUser /></Link>
     </div>
   </div>
   )

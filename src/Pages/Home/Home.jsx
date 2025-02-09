@@ -1,5 +1,6 @@
 import React from 'react'
 import videoPath from '/taxi.mp4'
+import { Link } from 'react-router-dom'
 
 
 function Home() {
@@ -27,9 +28,9 @@ function Home() {
         </p>
        
         <div>
-          <button className="bg-secondary border-2 border-primary mt-9  text-white py-3 px-6 rounded-full text-[16x]">
+         <Link><button className="bg-secondary border-2 border-primary mt-9  text-white py-3 px-6 rounded-full text-[16x]">
             Book a Ride
-          </button>
+          </button></Link> 
         </div>
       </div>
       </div>

@@ -73,13 +73,11 @@ function BookForm() {
 
                     {/* Book Now Button */}
                     <div className='w-full flex justify-center mt-8'>
-                        <motion.button 
+                        <button 
                             className='bg-gradient-to-r from-yellow-500 to-yellow-700 text-white text-lg font-bold px-10 py-3 rounded-lg hover:shadow-xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-yellow-400'
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
                         >
                             Book Now
-                        </motion.button>
+                        </button>
                     </div>
                 </form>
             </div>
