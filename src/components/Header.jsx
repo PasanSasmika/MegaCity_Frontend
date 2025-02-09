@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '/Group 2.svg'
 import { IoCall, IoLocation, IoMail } from 'react-icons/io5'
+import { Link } from 'react-router-dom'
 
 
 function Header() {
@@ -30,12 +31,16 @@ function Header() {
         <a href='#about' className='text-slate-900 hover:text-primary'>About</a>
         <a href='#services' className='text-slate-900 hover:text-primary'>Services</a>
         <a href='#contact' className='text-slate-900 hover:text-primary'>Contact</a>
+        <Link to={"/driver"} className="text-slate-900 hover:text-primary">Become a Driver</Link>
+        <a href='#contact' className='text-slate-900 hover:text-primary'>Contact</a>
+      <Link to="/login"><a href='#contact' className='text-slate-900 hover:text-primary'>Login</a></Link>  
+
       </nav>
       
       </div>
-      <div className='w-52 h-14 flex justify-center items-center mr-10 rounded-lg font-secondery text-[17px]  bg-primary hover:bg-slate-900 hover:text-primary'>
+      <Link to={"/ride"}><div className='w-52 h-14 flex justify-center items-center mr-10 rounded-lg font-secondery text-[17px]  bg-primary hover:bg-slate-900 hover:text-primary'>
       <button>Let's Ride now !</button>
-      </div>
+      </div></Link>
       
     </div>
   </div>
