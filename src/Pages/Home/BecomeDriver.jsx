@@ -47,7 +47,7 @@ function BecomeDriver() {
         }
         try {
           await axios.post(
-            ('http://localhost:8080/auth/create'),
+            ('http://localhost:8080/auth/createdriver'),
             driverDetails, 
           );
           navigate('/');
