@@ -4,11 +4,12 @@ import { FiSettings, FiLogOut, FiSearch } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BsGrid } from "react-icons/bs";
 import { RiHome3Line } from "react-icons/ri";
-import { IoBookmarksOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { PiSteeringWheel } from "react-icons/pi";
-import Bookings from './Bookings';
+import AdminList from './Admin';
+import Drivers from './Drivers';
+import Customers from './Customers';
 
 function AdminHome() {
   const [isOpen, setIsOpen] = useState(true);
@@ -32,19 +33,19 @@ function AdminHome() {
     <RiHome3Line size={24} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Home</span>
   </Link>
-  <Link to="/adminpage/booking" className="flex items-center gap-4 text-lg hover:text-gray-400">
-    <IoBookmarksOutline size={24} />
-    <span className={`${isOpen ? "block" : "hidden"}`}>Bookings</span>
-  </Link>
-  <Link to="/dexes" className="flex items-center gap-4 text-lg hover:text-gray-400">
-    <FaRegUser size={24} />
-    <span className={`${isOpen ? "block" : "hidden"}`}>Customers</span>
-  </Link>
-  <Link to="/protocols" className="flex items-center gap-4 text-lg hover:text-gray-400">
+  <Link to="/adminpage/drivers" className="flex items-center gap-4 text-lg hover:text-gray-400">
     <PiSteeringWheel size={24} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Drivers</span>
   </Link>
-  <Link to="/settings" className="flex items-center gap-4 text-lg hover:text-gray-400">
+  <Link to="/adminpage/customers" className="flex items-center gap-4 text-lg hover:text-gray-400">
+    <FaRegUser size={24} />
+    <span className={`${isOpen ? "block" : "hidden"}`}>Customers</span>
+  </Link>
+  <Link to="/adminpage/drivers" className="flex items-center gap-4 text-lg hover:text-gray-400">
+    <PiSteeringWheel size={24} />
+    <span className={`${isOpen ? "block" : "hidden"}`}>Drivers</span>
+  </Link>
+  <Link to="/adminpage/admin" className="flex items-center gap-4 text-lg hover:text-gray-400">
     <MdOutlineAdminPanelSettings size={20} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Admins</span>
   </Link>
@@ -68,10 +69,10 @@ function AdminHome() {
         <div className="mt-4 p-6 bg-white rounded-lg shadow-lg h-[80vh]">
           <Routes path="/*">
             <Route path="/" element={<h1 className="text-center text-xl">Dashboard </h1>} />
-            <Route path="/booking" element={<Bookings/>} />
-            <Route path="/dexes" element={<h1 className="text-center text-xl"> Customers</h1>} />
-            <Route path="/protocols" element={<h1 className="text-center text-xl">Drivers</h1>} />
-            <Route path="/settings" element={<h1 className="text-center text-xl"> Admins</h1>} />
+            <Route path="/drivers" element={<Drivers/>} />
+            <Route path="/customers" element={<Customers/>} />
+            {/* <Route path="/drivers" element={<h1 className="text-center text-xl">Drivers</h1>} /> */}
+            <Route path="/admin" element={<AdminList/>} />
           </Routes>
         </div>
       </div>

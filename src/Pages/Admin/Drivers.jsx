@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function Bookings() {
+function Drivers() {
   const [drivers, setDrivers] = useState([]);
 
   useEffect(() => {
@@ -41,4 +41,4 @@ function Bookings() {
   );
 }
 
-export default Bookings;
+export default Drivers;
