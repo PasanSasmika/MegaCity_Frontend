@@ -18,7 +18,7 @@ function App() {
     <Route path='/driver' element ={<BecomeDriver/>}/>
     <Route path='/login' element ={<LoginPage/>}/>
     <Route path='/driverdashboard' element ={<DriverDashboard/>}/>
-    <Route path='/adminpage' element ={<AdminHome/>}/>
+    <Route path='/adminpage/*' element ={<AdminHome/>}/>
 
     
    </Routes>

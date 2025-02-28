@@ -8,6 +8,7 @@ import { IoBookmarksOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { PiSteeringWheel } from "react-icons/pi";
+import Bookings from './Bookings';
 
 function AdminHome() {
   const [isOpen, setIsOpen] = useState(true);
@@ -23,7 +24,7 @@ function AdminHome() {
           </button>
         </div>
         <div className="mt-6 flex flex-col gap-6">
-  <Link to="/dashboard" className="flex items-center gap-4 text-lg hover:text-gray-400">
+  <Link to="/" className="flex items-center gap-4 text-lg hover:text-gray-400">
     <FaRegUserCircle size={24} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Esther Howard</span>
   </Link>
@@ -31,7 +32,7 @@ function AdminHome() {
     <RiHome3Line size={24} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Home</span>
   </Link>
-  <Link to="/yields" className="flex items-center gap-4 text-lg hover:text-gray-400">
+  <Link to="/adminpage/booking" className="flex items-center gap-4 text-lg hover:text-gray-400">
     <IoBookmarksOutline size={24} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Bookings</span>
   </Link>
@@ -65,9 +66,9 @@ function AdminHome() {
           </div>
         </div>
         <div className="mt-4 p-6 bg-white rounded-lg shadow-lg h-[80vh]">
-          <Routes>
-            <Route path="/dashboard" element={<h1 className="text-center text-xl">Dashboard </h1>} />
-            <Route path="/yields" element={<h1 className="text-center text-xl"> Bookings</h1>} />
+          <Routes path="/*">
+            <Route path="/" element={<h1 className="text-center text-xl">Dashboard </h1>} />
+            <Route path="/booking" element={<Bookings/>} />
             <Route path="/dexes" element={<h1 className="text-center text-xl"> Customers</h1>} />
             <Route path="/protocols" element={<h1 className="text-center text-xl">Drivers</h1>} />
             <Route path="/settings" element={<h1 className="text-center text-xl"> Admins</h1>} />
