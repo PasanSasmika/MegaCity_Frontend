@@ -7,9 +7,10 @@ import { RiHome3Line } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { PiSteeringWheel } from "react-icons/pi";
-import AdminList from './Admin';
 import Drivers from './Drivers';
 import Customers from './Customers';
+import AddAdmins from './AddAdmins';
+import Admin from './Admin';
 
 function AdminHome() {
   const [isOpen, setIsOpen] = useState(true);
@@ -41,10 +42,6 @@ function AdminHome() {
     <FaRegUser size={24} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Customers</span>
   </Link>
-  <Link to="/adminpage/drivers" className="flex items-center gap-4 text-lg hover:text-gray-400">
-    <PiSteeringWheel size={24} />
-    <span className={`${isOpen ? "block" : "hidden"}`}>Drivers</span>
-  </Link>
   <Link to="/adminpage/admin" className="flex items-center gap-4 text-lg hover:text-gray-400">
     <MdOutlineAdminPanelSettings size={20} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Admins</span>
@@ -60,19 +57,15 @@ function AdminHome() {
       {/* Main Content */}
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-semibold">Welcome back, Esther!</h1>
-          <div className="flex items-center gap-4">
-            <FiSearch size={20} className="text-gray-600 cursor-pointer" />
-            <FiSettings size={20} className="text-gray-600 cursor-pointer" />
-          </div>
+          <h1 className="text-2xl font-semibold">Welcome back</h1>
         </div>
         <div className="mt-4 p-6 bg-white rounded-lg shadow-lg h-[80vh]">
           <Routes path="/*">
             <Route path="/" element={<h1 className="text-center text-xl">Dashboard </h1>} />
             <Route path="/drivers" element={<Drivers/>} />
             <Route path="/customers" element={<Customers/>} />
-            {/* <Route path="/drivers" element={<h1 className="text-center text-xl">Drivers</h1>} /> */}
-            <Route path="/admin" element={<AdminList/>} />
+            <Route path="/admin" element={<AddAdmins/>} />
+            <Route path="/addAdmin" element={<Admin/>} />
           </Routes>
         </div>
       </div>
