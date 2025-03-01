@@ -23,7 +23,7 @@ function Customers() {
   }, []);
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-gray-100 h-[70vh]">
       <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">All Customers</h2>
       {error && <p className="text-red-500 text-center">{error}</p>} {/* Display error message if any */}
       <table className="min-w-full table-auto border-collapse shadow-lg bg-white rounded-lg">
