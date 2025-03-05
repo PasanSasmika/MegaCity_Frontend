@@ -14,11 +14,11 @@ function AddAdmins() {
 
     axios.get('http://localhost:8080/api/admin/alladmins', {
       headers: {
-        'Authorization': `Bearer ${token}`, // Add the token for authentication
+        'Authorization': `Bearer ${token}`,
       }
     })
     .then(response => {
-      setAdmins(response.data);  // Store the list of admins in the state
+      setAdmins(response.data);  
       setLoading(false);
     })
     .catch(error => {
