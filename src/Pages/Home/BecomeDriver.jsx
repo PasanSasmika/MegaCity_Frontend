@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import SelectCategory from "./SelectCategory";
 
 function BecomeDriver() {
 
@@ -77,6 +78,7 @@ function BecomeDriver() {
             easy and quick!
           </p>
           <form  className="space-y-5" onSubmit={handleSubmit}>
+            <SelectCategory/>
             {/* Row 1 */}
             <div className="flex gap-6">
               <div className="w-full md:w-1/2">
