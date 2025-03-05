@@ -1,88 +1,139 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { FaMapMarkerAlt, FaCar, FaDollarSign } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { Loader } from "@googlemaps/js-api-loader";
 
-function BookForm() {
-    const location = useLocation();
-    const { name, price, seats } = location.state || {};
+const BookingFormWithMap = () => {
+  const [pickup, setPickup] = useState("");
+  const [drop, setDrop] = useState("");
+  const [distance, setDistance] = useState(null);
+  const [map, setMap] = useState(null);
+  const [directionsService, setDirectionsService] = useState(null);
+  const [directionsRenderer, setDirectionsRenderer] = useState(null);
+  const [autocompletePickup, setAutocompletePickup] = useState(null);
+  const [autocompleteDrop, setAutocompleteDrop] = useState(null);
 
-    const locations = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami'];
-    const [startLocation, setStartLocation] = useState('');
-    const [dropLocation, setDropLocation] = useState('');
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: "AIzaSyD3WC4ofY-qZw1skED-PgJthpJBj7IImyw",
+      libraries: ["places", "directions"],
+    });
 
-    return (
-        <motion.div 
-            className='min-h-screen flex items-center justify-center bg-slate-200 px-4'
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-        >
-            <div className='bg-white p-10 rounded-2xl shadow-2xl w-full max-w-3xl'>
-                <h2 className='text-4xl font-extrabold text-center text-gray-800 mb-6 tracking-wide'>Book Your Ride</h2>
-                <form className='flex flex-wrap gap-6'>
-                    {/* Start Location Dropdown */}
-                    <div className='flex-1 min-w-[250px]'>
-                        <label className='block text-gray-700 font-medium mb-2'>Start Location</label>
-                        <div className='flex items-center border rounded-lg p-3 bg-gray-100 shadow-md'>
-                            <FaMapMarkerAlt className='text-yellow-600 mr-3' />
-                            <select 
-                                className='w-full bg-transparent focus:outline-none text-gray-800' 
-                                value={startLocation} 
-                                onChange={(e) => setStartLocation(e.target.value)}
-                            >
-                                <option value='' disabled>Select start location</option>
-                                {locations.map((loc, index) => (
-                                    <option key={index} value={loc}>{loc}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
+    loader.load().then(() => {
+      const mapInstance = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 7.8731, lng: 80.7718 }, // Centered in Sri Lanka
+        zoom: 8,
+      });
+      setMap(mapInstance);
 
-                    {/* Drop Location Dropdown */}
-                    <div className='flex-1 min-w-[250px]'>
-                        <label className='block text-gray-700 font-medium mb-2'>Drop Location</label>
-                        <div className='flex items-center border rounded-lg p-3 bg-gray-100 shadow-md'>
-                            <FaMapMarkerAlt className='text-yellow-600 mr-3' />
-                            <select 
-                                className='w-full bg-transparent focus:outline-none text-gray-800' 
-                                value={dropLocation} 
-                                onChange={(e) => setDropLocation(e.target.value)}
-                            >
-                                <option value='' disabled>Select drop location</option>
-                                {locations.map((loc, index) => (
-                                    <option key={index} value={loc}>{loc}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
+      // Directions Service
+      const directionsServiceInstance = new google.maps.DirectionsService();
+      setDirectionsService(directionsServiceInstance);
 
-                    {/* Car Details */}
-                    <motion.div 
-                        className='flex-1 min-w-[250px]'
-                        whileHover={{ scale: 1.05 }}
-                    >
-                        <label className='block text-gray-700 font-medium mb-2'>Car Details</label>
-                        <div className='border rounded-lg p-6 bg-gradient-to-r from-gray-100 to-gray-300 flex flex-col items-center text-center shadow-lg'>
-                            <FaCar className='text-yellow-600 text-5xl mb-3' />
-                            <p className='text-2xl font-semibold text-gray-900'>{name || 'No Car Selected'}</p>
-                            <p className='text-gray-700 flex items-center gap-1 text-lg'><FaDollarSign className='text-green-500' /> {price || 'N/A'}</p>
-                            <p className='text-gray-700 text-lg'>Seats: {seats || 'N/A'}</p>
-                        </div>
-                    </motion.div>
+      // Directions Renderer to show the route
+      const directionsRendererInstance = new google.maps.DirectionsRenderer();
+      directionsRendererInstance.setMap(mapInstance);
+      setDirectionsRenderer(directionsRendererInstance);
 
-                    {/* Book Now Button */}
-                    <div className='w-full flex justify-center mt-8'>
-                        <button 
-                            className='bg-gradient-to-r from-yellow-500 to-yellow-700 text-white text-lg font-bold px-10 py-3 rounded-lg hover:shadow-xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-yellow-400'
-                        >
-                            Book Now
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </motion.div>
-    );
-}
+      // Initialize Autocomplete for pickup location
+      const pickupInput = document.getElementById("pickup");
+      const dropInput = document.getElementById("drop");
 
-export default BookForm;
+      const autocompletePickupInstance = new google.maps.places.Autocomplete(pickupInput, {
+        componentRestrictions: { country: "LK" },
+        fields: ["formatted_address"],
+      });
+
+      const autocompleteDropInstance = new google.maps.places.Autocomplete(dropInput, {
+        componentRestrictions: { country: "LK" },
+        fields: ["formatted_address"],
+      });
+
+      setAutocompletePickup(autocompletePickupInstance);
+      setAutocompleteDrop(autocompleteDropInstance);
+
+      autocompletePickupInstance.addListener("place_changed", () => {
+        const place = autocompletePickupInstance.getPlace();
+        setPickup(place.formatted_address);
+      });
+
+      autocompleteDropInstance.addListener("place_changed", () => {
+        const place = autocompleteDropInstance.getPlace();
+        setDrop(place.formatted_address);
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (pickup && drop) {
+      const service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(
+        {
+          origins: [pickup],
+          destinations: [drop],
+          travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (response, status) => {
+          if (status === "OK" && response.rows[0].elements[0].status === "OK") {
+            setDistance(response.rows[0].elements[0].distance.text);
+
+            // Request Directions for the route
+            const request = {
+              origin: pickup,
+              destination: drop,
+              travelMode: google.maps.TravelMode.DRIVING,
+            };
+
+            directionsService.route(request, (result, status) => {
+              if (status === google.maps.DirectionsStatus.OK) {
+                // Set the route on the map
+                directionsRenderer.setDirections(result);
+              } else {
+                alert("Directions request failed due to " + status);
+              }
+            });
+          } else {
+            setDistance("Distance not available");
+          }
+        }
+      );
+    }
+  }, [pickup, drop]); // Trigger distance calculation whenever pickup or drop changes
+
+  return (
+    <div className="flex w-full h-screen">
+      {/* Left side: Map */}
+      <div className="w-1/2 h-full">
+        <div id="map" className="w-full h-full"></div>
+      </div>
+
+      {/* Right side: Form */}
+      <div className="w-1/2 p-6 bg-gray-100">
+        <h2 className="text-2xl font-bold mb-4">Book Your Ride</h2>
+        <form className="space-y-4">
+          <input
+            id="pickup"
+            type="text"
+            placeholder="Pickup Location"
+            className="w-full p-2 border"
+            value={pickup}
+            onChange={(e) => setPickup(e.target.value)}
+          />
+          <input
+            id="drop"
+            type="text"
+            placeholder="Drop Location"
+            className="w-full p-2 border"
+            value={drop}
+            onChange={(e) => setDrop(e.target.value)}
+          />
+          <input type="datetime-local" className="w-full p-2 border" />
+          <input type="text" placeholder="Customer Name" className="w-full p-2 border" />
+          <input type="email" placeholder="Customer Email" className="w-full p-2 border" />
+          <input type="tel" placeholder="Phone Number" className="w-full p-2 border" />
+          {distance && <p className="mt-2 text-lg">Distance: {distance}</p>}
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default BookingFormWithMap;
