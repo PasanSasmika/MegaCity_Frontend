@@ -7,10 +7,12 @@ import BecomeDriver from './Pages/Home/BecomeDriver'
 import LoginPage from './Pages/Home/LoginPage'
 import AdminHome from './Pages/Admin/AdminHome'
 import DriverHome from './Pages/Driver/DriverHome'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
-    //t
+  <>
+   <Toaster/>
    <Routes>
     <Route path='/' element ={<NavBarLayout/>}/>
     <Route path='/ride' element ={<RideBook/>}/>bookform
@@ -21,6 +23,7 @@ function App() {
     <Route path='/adminpage/*' element ={<AdminHome/>}/>
     
    </Routes>
+   </>
   )
 }
 

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { useLocation } from "react-router-dom";
 import { FaCar, FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarAlt, FaClock } from "react-icons/fa";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const BookingFormWithMap = () => {
   const [pickup, setPickup] = useState("");
@@ -13,9 +15,24 @@ const BookingFormWithMap = () => {
   const [directionsRenderer, setDirectionsRenderer] = useState(null);
   const [autocompletePickup, setAutocompletePickup] = useState(null);
   const [autocompleteDrop, setAutocompleteDrop] = useState(null);
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const location = useLocation();
-  const { name, type, seats, price } = location.state || {};
-  
+
+  // Log location.state for debugging
+  console.log("Location State:", location.state);
+
+  // Provide fallback values if location.state is undefined
+  const { name, type, seats, price, Id } = location.state || {
+    name: "",
+    type: "",
+    seats: 0,
+    price: 0,
+    Id: "",
+  };
 
   useEffect(() => {
     const loader = new Loader({
@@ -111,7 +128,40 @@ const BookingFormWithMap = () => {
         }
       );
     }
-  }, [pickup, drop]); // Trigger distance calculation whenever pickup or drop changes
+  }, [pickup, drop]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const bookingData = {
+      pickupLocation: pickup,
+      dropLocation: drop,
+      date: date,
+      time: time,
+      customerName: customerName,
+      email: email,
+      phone: phone,
+      distance: distance,
+      total: totalPrice,
+      driverID: Id,
+      bookingStatus: "Pending",
+    };
+
+    try {
+      const token =localStorage.getItem('token');
+      const response = await axios.post("http://localhost:8080/api/bookings", bookingData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Booking successful:", response.data);
+      toast.success("Booking successful!");
+    } catch (error) {
+      console.error("Booking failed:", error);
+      toast.error("Booking failed. Please try again.");
+    }
+  };
 
   return (
     <div className="flex w-full h-screen">
@@ -123,8 +173,8 @@ const BookingFormWithMap = () => {
       {/* Right side: Form */}
       <div className="w-[70%] p-8 bg-gray-50">
         <h2 className="text-3xl font-bold mb-6 text-blue-800">Book Your Ride</h2>
-     {/* Vehicle Details Card at the Top */}
-     <div className="bg-white h-[190px] p-6 rounded-lg shadow-lg mb-8 border border-gray-200">
+        {/* Vehicle Details Card at the Top */}
+        <div className="bg-white h-[190px] p-6 rounded-lg shadow-lg mb-8 border border-gray-200">
           <h3 className="text-2xl font-bold mb-4 text-blue-800 flex items-center gap-2">
             <FaCar className="text-blue-600" /> Vehicle Details
           </h3>
@@ -143,10 +193,12 @@ const BookingFormWithMap = () => {
             </p>
           </div>
         </div>
-       
 
         {/* Booking Form Below */}
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          {/* Display driverID for debugging */}
+          <span >Driver ID: {Id}</span>
+
           {/* Row 1: Pickup and Drop Locations */}
           <div className="flex gap-6">
             <div className="flex-1">
@@ -187,6 +239,8 @@ const BookingFormWithMap = () => {
                 type="date"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 min={new Date().toISOString().split("T")[0]}
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
               />
             </div>
             <div className="flex-1">
@@ -196,6 +250,8 @@ const BookingFormWithMap = () => {
               <input
                 type="time"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
               />
             </div>
           </div>
@@ -210,16 +266,20 @@ const BookingFormWithMap = () => {
                 type="text"
                 placeholder="Enter your name"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                value={customerName}
+                onChange={(e) => setCustomerName(e.target.value)}
               />
             </div>
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
                 <FaEnvelope className="text-blue-600" /> Customer Email
               </label>
               <input
                 type="email"
                 placeholder="Enter your email"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -227,20 +287,21 @@ const BookingFormWithMap = () => {
           {/* Row 4: Phone Number */}
           <div className="flex gap-6">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <label className=" text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
                 <FaPhone className="text-blue-600" /> Phone Number
               </label>
               <input
                 type="tel"
                 placeholder="Enter your phone number"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
             {/* Empty div to maintain alignment */}
             <div className="flex-1"></div>
           </div>
 
-            
           {/* Distance and Total Price */}
           {distance && (
             <p className="mt-4 text-lg font-semibold text-blue-800">
@@ -252,11 +313,12 @@ const BookingFormWithMap = () => {
               Total Price: <span className="text-gray-700">${totalPrice}</span>
             </p>
           )}
-            <button
-          className="mt-4 px-6 py-3 bg-[#d5883a] text-white text-lg font-semibold rounded-lg shadow-md hover:bg-[#fc9f3f] hover:scale-105 transition duration-300"
-        >
-         Book Now
-        </button>
+          <button
+            type="submit"
+            className="mt-4 px-6 py-3 bg-[#d5883a] text-white text-lg font-semibold rounded-lg shadow-md hover:bg-[#fc9f3f] hover:scale-105 transition duration-300"
+          >
+            Book Now
+          </button>
         </form>
       </div>
     </div>

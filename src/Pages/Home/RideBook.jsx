@@ -28,7 +28,8 @@ function RideBook() {
         name: vehical.vehicalName,
         type: vehical.vehicalType,
         seats: vehical.vehicalSeats,
-        price: vehical.pricePerKm
+        price: vehical.pricePerKm,
+        Id: vehical.driverID
       },
     });
   };
@@ -54,6 +55,7 @@ function RideBook() {
                {vehical.vehicalType}
               </h1>
               <p className="text-lg font-main text-gray-600 mt-1">Seats: {vehical.vehicalSeats}</p>
+              <p >{vehical.driverID}</p>
               <p className="text-lg font-main text-gray-600 mt-1">Price per KM:  {vehical.pricePerKm}/=</p>
               <div className={`mt-4 px-4 py-2 rounded-full text-white ${vehical.driverStatues ? 'bg-green-600' : 'bg-red-600'} flex items-center gap-2`}>
                 {vehical.driverStatues ? <IoCheckmarkCircle /> : <IoCloseCircle />} {vehical.driverStatues ? 'Available' : 'Unavailable'}
