@@ -18,9 +18,10 @@ function LoginPage() {
       });
 
       if (response.status === 200) {
-        const { token, role } = response.data; // Assuming the backend sends { token, role }
+        const { token, role , userId} = response.data; // Assuming the backend sends { token, role }
         localStorage.setItem("token", token); // Store the token
         localStorage.setItem("role", role);
+        localStorage.setItem("userId", userId);
         // Redirect based on user role
         if (role === "ROLE_CUSTOMER") {
           navigate("/");

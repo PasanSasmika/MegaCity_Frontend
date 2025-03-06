@@ -3,6 +3,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import { BsGrid } from "react-icons/bs";
 import { RiHome3Line } from "react-icons/ri";
 import { FaClipboardList, FaCheckCircle, FaTrash, FaStar, FaUser } from "react-icons/fa";
+import PendingBookings from './PendingBookings';
 
 function AdminDashboard() {
   const [isOpen, setIsOpen] = useState(true);
@@ -12,7 +13,7 @@ function AdminDashboard() {
       {/* Sidebar */}
       <div className={`h-full bg-gradient-to-b from-green-900 to-black text-white p-6 transition-all ${isOpen ? "w-64" : "w-20"}`}>
         <div className="flex items-center justify-between">
-          <h1 className={`text-xl font-bold transition-all ${isOpen ? "block" : "hidden"}`}>ADMIN PANEL</h1>
+          <h1 className={`text-xl font-bold transition-all ${isOpen ? "block" : "hidden"}`}>DRIVER PANEL</h1>
           <button onClick={() => setIsOpen(!isOpen)} className="text-white">
             <BsGrid size={24} />
           </button>
@@ -48,13 +49,13 @@ function AdminDashboard() {
       {/* Main Content */}
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-semibold">Welcome to Admin Dashboard</h1>
+          <h1 className="text-2xl font-semibold">Welcome</h1>
         </div>
         <div className="mt-4 p-6 bg-white rounded-lg shadow-lg h-[80vh]">
           <Routes path="/*">
             <Route path="/" element={<h1 className="text-center text-xl">Dashboard Overview</h1>} />
-            <Route path="/pending" element={<h1>PendingBookings</h1>} />
-            <Route path="/confirmed" element={<h1>PendingBookings</h1>} />
+            <Route path="/pending" element={<PendingBookings/>} />
+            <Route path="/confirmed" element={<h1>PEnding</h1>} />
             <Route path="/delete" element={<h1>PendingBookings</h1>} />
             <Route path="/reviews" element={<h1>PendingBookings</h1>} />
             <Route path="/profile" element={<h1>PendingBookings</h1>} />

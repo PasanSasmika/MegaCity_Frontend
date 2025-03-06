@@ -28,7 +28,7 @@ function Home() {
         </p>
        
         <div>
-         <Link><button className="bg-secondary border-2 border-primary mt-9  text-white py-3 px-6 rounded-full text-[16x]">
+         <Link to="/ride"><button className="bg-secondary border-2 border-primary mt-9  text-white py-3 px-6 rounded-full text-[16x]">
             Book a Ride
           </button></Link> 
         </div>

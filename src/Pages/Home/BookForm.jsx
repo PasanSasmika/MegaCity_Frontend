@@ -259,7 +259,7 @@ const BookingFormWithMap = () => {
           {/* Row 3: Customer Name and Email */}
           <div className="flex gap-6">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <label className=" text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
                 <FaUser className="text-blue-600" /> Customer Name
               </label>
               <input
@@ -271,7 +271,7 @@ const BookingFormWithMap = () => {
               />
             </div>
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+              <label className=" text-sm  text-gray-700 mb-1 flex items-sm font-medium t  items-center gap-2">
                 <FaEnvelope className="text-blue-600" /> Customer Email
               </label>
               <input
