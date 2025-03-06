@@ -26,8 +26,9 @@ function RideBook() {
     navigate(`/bookform/`, {
       state: {
         name: vehical.vehicalName,
-        price: vehical.price,
+        type: vehical.vehicalType,
         seats: vehical.vehicalSeats,
+        price: vehical.pricePerKm
       },
     });
   };
@@ -35,8 +36,8 @@ function RideBook() {
   return (
     <div className="min-h-screen bg-white">
       <div className="flex flex-col w-full items-center pt-20">
-        <h1 className="text-primary text-xl font-main">Choose Your Ride</h1>
-        <h1 className="text-6xl font-main font-bold leading-tight">
+        <h1 className="text-primary text-2xl font-main">Choose Your Ride</h1>
+        <h1 className="text-7xl font-main font-bold leading-tight text-gray-900">
           Book Your Perfect Car<span className="text-primary">.</span>
         </h1>
       </div>
@@ -46,15 +47,18 @@ function RideBook() {
           <div key={vehical.id || index} className="w-[390px] bg-gray-100 shadow-lg rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300">
             <img src={vehical.imageUrl} alt={vehical.vehicalName} className="w-full h-48 object-cover rounded-xl" />
             <div className="mt-4 flex flex-col items-center">
-              <h1 className="font-main font-bold text-2xl text-gray-800 flex items-center gap-2">
+              <h1 className="font-main font-bold text-3xl text-gray-900 flex items-center gap-2">
                 <IoCarSport /> {vehical.vehicalName}
               </h1>
-              <p className="text-lg font-main text-gray-600 mt-2">{vehical.price}</p>
+              <h1 className="font-main font-bold text-2xl text-gray-700 flex items-center gap-2">
+               {vehical.vehicalType}
+              </h1>
               <p className="text-lg font-main text-gray-600 mt-1">Seats: {vehical.vehicalSeats}</p>
-              <div className={`mt-4 px-4 py-2 rounded-full text-white ${vehical.driverStatus ? 'bg-green-500' : 'bg-red-500'} flex items-center gap-2`}>
-                {vehical.driverStatus ? <IoCheckmarkCircle /> : <IoCloseCircle />} {vehical.driverStatus ? 'Available' : 'Unavailable'}
+              <p className="text-lg font-main text-gray-600 mt-1">Price per KM:  {vehical.pricePerKm}/=</p>
+              <div className={`mt-4 px-4 py-2 rounded-full text-white ${vehical.driverStatues ? 'bg-green-600' : 'bg-red-600'} flex items-center gap-2`}>
+                {vehical.driverStatues ? <IoCheckmarkCircle /> : <IoCloseCircle />} {vehical.driverStatues ? 'Available' : 'Unavailable'}
               </div>
-              {vehical.driverStatus && (
+              {vehical.driverStatues && (
                 <button className="mt-4 px-6 py-2 bg-primary text-white font-bold rounded-full hover:bg-primary/80 transition duration-300"
                   onClick={() => click(vehical)}
                 >
