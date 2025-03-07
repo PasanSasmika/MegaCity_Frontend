@@ -97,323 +97,326 @@ function BecomeDriver() {
 
   return (
     <div
-      className="relative min-h-screen bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${image})`, // Use the imported local image
-      }}
+      className="relative min-h-screen w-full"
     >
-      <div className="absolute inset-0 bg-black opacity-60"></div>
+      <div className="absolute inset-0"></div>
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
-        <div className="bg-gradient-to-r from-blue-50 to-yellow-50  p-8 rounded-3xl shadow-2xl w-full max-w-5xl">
-          <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-4">
+        <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-5xl">
+          <h1 className="text-4xl font-primary font-extrabold text-center text-accent mb-4">
             Become a Driver with Us
           </h1>
-          <p className="text-lg text-gray-700 text-center mb-6">
+          <p className="text-lg font-secondary text-gray-700 text-center mb-6">
             Fill out the form below to apply and start driving with us. It's
             easy and quick!
           </p>
           <form className="space-y-5" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {categories.map((category) => (
-                <label
-                  key={category.catID}
-                  htmlFor={`category-${category.catID}`}
-                  className={`cursor-pointer border-2 rounded-xl p-3 flex flex-col items-start transition-all duration-300 ${
-                    selectedCategory?.catID === category.catID
-                      ? "border-yellow-500 bg-yellow-100 shadow-lg"
-                      : "border-gray-300 bg-white hover:shadow-md hover:border-yellow-500"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    id={`category-${category.catID}`}
-                    name="category"
-                    value={category.catID}
-                    onChange={() => handleSelectCategory(category)}
-                    className="hidden"
-                  />
-                  <div className="flex flex-col w-full">
-                    <span className="text-md font-semibold text-gray-800">
-                      {category.catType}
-                    </span>
-                    <span className="text-sm text-gray-600">
-                      Seats: {category.noOfSeats}
-                    </span>
-                    <span className="text-sm text-gray-600">
-                      Price per KM: {category.pricePerKm}
-                    </span>
+            <div className="flex flex-col md:flex-row gap-8">
+              {/* Left Section: Category Selection */}
+              <div className="flex flex-col gap-4 p-8 rounded-xl  w-[300px]">
+                {categories.map((category) => (
+                  <label
+                    key={category.catID}
+                    htmlFor={`category-${category.catID}`}
+                    className={`cursor-pointer border-2 rounded-xl p-3 flex flex-col items-start transition-all duration-300 ${
+                      selectedCategory?.catID === category.catID
+                        ? "border-[#f0db2e] bg-[#f0db2e] shadow-lg"
+                        : "border-gray-300 bg-white hover:shadow-md hover:border-[#f0db2e]"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      id={`category-${category.catID}`}
+                      name="category"
+                      value={category.catID}
+                      onChange={() => handleSelectCategory(category)}
+                      className="hidden"
+                    />
+                    <div className="flex flex-col w-full">
+                      <span className="text-xl font-primary font-semibold text-gray-800">
+                        {category.catType}
+                      </span>
+                      <span className="text-sm font-secondary text-gray-600">
+                        Seats: {category.noOfSeats}
+                      </span>
+                      <span className="text-sm font-secondary text-gray-600">
+                        Price per KM: {category.pricePerKm}
+                      </span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+
+              {/* Right Section: Form Fields */}
+              <div className="space-y-5 flex-1">
+                {/* Row 1 */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="driverName"
+                    >
+                      <FaUser className="inline-block mr-2  text-secondery" />
+                      Driver Name
+                    </label>
+                    <input
+                      type="text"
+                      id="driverName"
+                      name="driverName"
+                      value={driverName}
+                      onChange={(e) => setDriverName(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter your name"
+                      required
+                    />
                   </div>
-                </label>
-              ))}
-            </div>
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px]  font-medium mb-2"
+                      htmlFor="driverAddress"
+                    >
+                      <FaMapMarkerAlt className="inline-block mr-2 text-secondery" />
+                      Driver Address
+                    </label>
+                    <input
+                      type="text"
+                      id="driverAddress"
+                      name="driverAddress"
+                      value={driverAddress}
+                      onChange={(e) => setDriverAddress(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter your address"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="driverPhone"
+                    >
+                      <FaPhone className="inline-block mr-2 text-secondery" />
+                      Driver Phone
+                    </label> 
+                    <input
+                      type="tel"
+                      id="driverPhone"
+                      name="driverPhone"
+                      value={driverPhone}
+                      onChange={(e) => setDriverPhone(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter your phone number"
+                      required
+                    />
+                  </div>
+                </div>
 
-            {/* Row 1 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="driverName"
-                >
-                  <FaUser className="inline-block mr-2" />
-                  Driver Name
-                </label>
-                <input
-                  type="text"
-                  id="driverName"
-                  name="driverName"
-                  value={driverName}
-                  onChange={(e) => setDriverName(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="driverAddress"
-                >
-                  <FaMapMarkerAlt className="inline-block mr-2" />
-                  Driver Address
-                </label>
-                <input
-                  type="text"
-                  id="driverAddress"
-                  name="driverAddress"
-                  value={driverAddress}
-                  onChange={(e) => setDriverAddress(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter your address"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="driverPhone"
-                >
-                  <FaPhone className="inline-block mr-2" />
-                  Driver Phone
-                </label>
-                <input
-                  type="tel"
-                  id="driverPhone"
-                  name="driverPhone"
-                  value={driverPhone}
-                  onChange={(e) => setDriverPhone(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter your phone number"
-                  required
-                />
-              </div>
-            </div>
+                {/* Row 2 */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="driverEmail"
+                    >
+                      <FaEnvelope className="inline-block mr-2 text-secondery" />
+                      Driver Email
+                    </label>
+                    <input
+                      type="email"
+                      id="driverEmail"
+                      name="driverEmail"
+                      value={driverEmail}
+                      onChange={(e) => setDriverEmail(e.target.value)}
+                      className="w-full p-2 border border-gray-300 rounded-lg  font-secondary focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter your email address"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="userName"
+                    >
+                      <FaUser className="inline-block mr-2 text-secondery" />
+                      Username
+                    </label>
+                    <input
+                      type="text"
+                      id="userName"
+                      name="userName"
+                      value={userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter a username"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-gray-700 font-medium mb-2"
+                      htmlFor="password"
+                    >
+                      <FaKey className="inline-block mr-2 text-secondery" />
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter your password"
+                      required
+                    />
+                  </div>
+                </div>
 
-            {/* Row 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="driverEmail"
-                >
-                  <FaEnvelope className="inline-block mr-2" />
-                  Driver Email
-                </label>
-                <input
-                  type="email"
-                  id="driverEmail"
-                  name="driverEmail"
-                  value={driverEmail}
-                  onChange={(e) => setDriverEmail(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter your email address"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="userName"
-                >
-                  <FaUser className="inline-block mr-2" />
-                  Username
-                </label>
-                <input
-                  type="text"
-                  id="userName"
-                  name="userName"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter a username"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="password"
-                >
-                  <FaKey className="inline-block mr-2" />
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter your password"
-                  required
-                />
-              </div>
-            </div>
+                {/* Row 3 */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="driverStatus"
+                    >
+                      <FaCheckCircle className="inline-block mr-2 text-secondery" />
+                      Driver Status 
+                    </label>
+                    <input
+                      type="text"
+                      id="driverStatus"
+                      name="driverStatus"
+                      value={driverStatues}
+                      onChange={(e) => setDriverStatus(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary  rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter driver status"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="vehicleName"
+                    >
+                      <FaCar className="inline-block mr-2 text-secondery" />
+                      Vehicle Name
+                    </label>
+                    <input
+                      type="text"
+                      id="vehicleName"
+                      name="vehicleName"
+                      value={vehicalName}
+                      onChange={(e) => setVehicleName(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter vehicle name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="vehicleType"
+                    >
+                      <FaCar className="inline-block mr-2 text-secondery" />
+                      Vehicle Type 
+                    </label>
+                    <input
+                      type="text"
+                      id="vehicleType"
+                      name="vehicleType"
+                      value={vehicalType}
+                      onChange={(e) => setVehicleType(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter vehicle type"
+                      required
+                      disabled
+                    />
+                  </div>
+                </div>
 
-            {/* Row 3 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="driverStatus"
-                >
-                  <FaCheckCircle className="inline-block mr-2" />
-                  Driver Status <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="driverStatus"
-                  name="driverStatus"
-                  value={driverStatues}
-                  onChange={(e) => setDriverStatus(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter driver status"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="vehicleName"
-                >
-                  <FaCar className="inline-block mr-2" />
-                  Vehicle Name
-                </label>
-                <input
-                  type="text"
-                  id="vehicleName"
-                  name="vehicleName"
-                  value={vehicalName}
-                  onChange={(e) => setVehicleName(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter vehicle name"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="vehicleType"
-                >
-                  <FaCar className="inline-block mr-2" />
-                  Vehicle Type <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="vehicleType"
-                  name="vehicleType"
-                  value={vehicalType}
-                  onChange={(e) => setVehicleType(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter vehicle type"
-                  required
-                  disabled
-                />
-              </div>
-            </div>
+                {/* Row 4 */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="vehicleModel"
+                    >
+                      <FaCar className="inline-block mr-2 text-secondery" />
+                      Vehicle Model 
+                    </label>
+                    <input
+                      type="text"
+                      id="vehicleModel"
+                      name="vehicleModel"
+                      value={vehicalModel}
+                      onChange={(e) => setVehicleModel(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter vehicle model"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="vehicleSeats"
+                    >
+                      <FaCar className="inline-block mr-2 text-secondery" />
+                      Vehicle Seats
+                    </label>
+                    <input
+                      type="number"
+                      id="vehicleSeats"
+                      name="vehicleSeats"
+                      value={vehicalSeats}
+                      onChange={(e) => setVehicleSeats(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter number of seats"
+                      required
+                      disabled
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="price KM"
+                    >
+                      <FaCar className="inline-block mr-2 text-secondery" />
+                      Price per KM 
+                    </label>
+                    <input
+                      type="number"
+                      id="price KM"
+                      name="set price KM"
+                      value={pricePerKm}
+                      onChange={(e) => setPricePerKm(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter price per KM"
+                      required
+                      disabled
+                    />
+                  </div>
+                </div>
 
-            {/* Row 4 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="vehicleModel"
-                >
-                  <FaCar className="inline-block mr-2" />
-                  Vehicle Model <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="vehicleModel"
-                  name="vehicleModel"
-                  value={vehicalModel}
-                  onChange={(e) => setVehicleModel(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter vehicle model"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="vehicleSeats"
-                >
-                  <FaCar className="inline-block mr-2" />
-                  Vehicle Seats <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="number"
-                  id="vehicleSeats"
-                  name="vehicleSeats"
-                  value={vehicalSeats}
-                  onChange={(e) => setVehicleSeats(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter number of seats"
-                  required
-                  disabled
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="price KM"
-                >
-                  <FaCar className="inline-block mr-2" />
-                  Price per KM <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="number"
-                  id="price KM"
-                  name="set price KM"
-                  value={pricePerKm}
-                  onChange={(e) => setPricePerKm(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter price per KM"
-                  required
-                  disabled
-                />
-              </div>
-            </div>
-
-            {/* Row 5 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                  htmlFor="imageUrl"
-                >
-                  <FaImage className="inline-block mr-2" />
-                  Image URL <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="imageUrl"
-                  name="imageUrl"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter image URL"
-                  required
-                />
+                {/* Row 5 */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label
+                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
+                      htmlFor="imageUrl"
+                    >
+                      <FaImage className="inline-block mr-2 text-secondery" />
+                      Image URL 
+                    </label>
+                    <input
+                      type="text"
+                      id="imageUrl"
+                      name="imageUrl"
+                      value={imageUrl}
+                      onChange={(e) => setImageUrl(e.target.value)}
+                      className="w-full p-2 border border-gray-300 rounded-lg font-secondary focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter image URL"
+                      required
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -421,7 +424,7 @@ function BecomeDriver() {
             <div className="w-full flex justify-center mt-6">
               <button
                 type="submit"
-                className="bg-yellow-500 text-white text-lg font-bold px-8 py-2 rounded-lg hover:shadow-xl transform transition duration-300 hover:scale-105"
+                className="bg-primary font-primary text-accent text-lg font-bold px-8 py-2 rounded-lg hover:shadow-xl transform transition duration-300 hover:scale-105"
                 onClick={handleSubmit}
               >
                 Submit Application

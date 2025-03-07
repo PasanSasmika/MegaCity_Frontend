@@ -8,12 +8,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        main: ["Poppins"],
-        secondery:["Inter"] 
-         
+        secondary: ["Inconsolata", "monospace"],
+        primary: ["Josefin Sans", "sans-serif"]
       },
-      colors:{
-        primary:"#fde047"
+       colors: {
+        secondery: "#0072ff",
+        primary: "#f0db2e",
+        accent: "#0f172a",
+        low: "#ff9c00",
       },
     },
   },

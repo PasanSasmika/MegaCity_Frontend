@@ -20,15 +20,16 @@ function Home() {
       <div className="flex flex-col justify-center items-center h-full space-y-4 text-center z-20">
         {/* Main Heading */}
         <div className='w-[900px] mt-16 h-[330px] flex flex-col justify-center items-center rounded-lg bg-[#0b0505ea]'>
-        <h1 className="text-white text-5xl md:text-6xl font-main font-bold leading-tight px-4 sm:px-12">
+        <h1 className="text-white text-5xl md:text-6xl font-primary font-extrabold tracking-wide
+ px-4 sm:px-12">
         Enjoy your comfortable trip <span className='text-primary'>.</span>
         </h1>
-        <p className="text-white  font-secondery text-xl mt-9">
+        <p className="text-white  font-secondary font-medium text-[22px] mt-9">
           Enjoy Your Comfortable Trip with Our Reliable Service
         </p>
        
         <div>
-         <Link to="/ride"><button className="bg-secondary border-2 border-primary mt-9  text-white py-3 px-6 rounded-full text-[16x]">
+         <Link to="/ride"><button className="bg-secondary border-2 border-primary mt-9 font-secondary text-white py-3 px-6 rounded-full text-[16x]">
             Book a Ride
           </button></Link> 
         </div>

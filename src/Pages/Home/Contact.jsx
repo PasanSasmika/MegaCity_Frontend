@@ -11,13 +11,13 @@ function Contact() {
       <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Left Side: Text Content */}
         <div className="w-full lg:w-1/2">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-6">
+          <h1 className="text-4xl sm:text-5xl font-primary font-bold text-accent mb-6">
             Contact Us
           </h1>
-          <h2 className="text-3xl font-semibold text-primary mb-6">Get In Touch</h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Lorem ipsum dolor sit amet consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Dolor sit amet consectetuer adipiscing elit.
-          </p>
+          <h2 className="text-3xl font-primary font-semibold text-primary mb-6">Get In Touch</h2>
+          <p className="text-lg text-gray-600 mb-8 font-secondary">
+          Have questions or need assistance? Our team is here to help! Reach out to us anytime for bookings, inquiries, or support.
+</p>
 
           {/* Contact Details */}
           <div className="space-y-6">
@@ -27,8 +27,8 @@ function Contact() {
                 <IoLocationSharp />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-800">Location</h3>
-                <p className="text-gray-600">
+                <h3 className="text-xl font-bold text-accent font-primary">Location</h3>
+                <p className="text-gray-600 font-secondary">
                   Jl. Merdeka Raya No. 73B, Kuta, Badung, Bali
                 </p>
               </div>
@@ -40,8 +40,8 @@ function Contact() {
                 <IoCall />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-800">Phone</h3>
-                <p className="text-gray-600">
+                <h3 className="text-xl font-bold text-accent font-primary">Phone</h3>
+                <p className="text-gray-600 font-secondary">
                   +628896-2220 | 02111144490
                 </p>
               </div>
@@ -53,9 +53,9 @@ function Contact() {
                 <IoMail />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-800">Email</h3>
-                <p className="text-gray-600">
-                  taxico@support.com | taxico@domain.com
+                <h3 className="text-xl font-bold text-accent font-primary">Email</h3>
+                <p className="text-gray-600 font-secondary">
+                  taxico@support.com
                 </p>
               </div>
             </div>
@@ -63,7 +63,7 @@ function Contact() {
 
           {/* Social Media Links */}
           <div className="mt-12">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Social Media</h3>
+            <h3 className="text-xl font-bold text-accent mb-4 font-primary">Social Media</h3>
             <div className="flex gap-6">
               <a href="#" className="text-gray-600 hover:text-primary transition duration-300">
                 <FaFacebook className="text-2xl" />
