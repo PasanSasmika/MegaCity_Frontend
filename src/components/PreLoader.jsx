@@ -14,7 +14,7 @@ function PreLoader() {
   }, []);
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen w-full bg-[#464643]'>
+    <div className='flex flex-col items-center justify-center h-screen w-full bg-secondery'>
       <AnimatePresence>
         {isVisible && ( // Conditionally render the preloader
           <>
