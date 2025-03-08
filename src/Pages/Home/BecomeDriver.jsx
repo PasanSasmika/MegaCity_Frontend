@@ -17,11 +17,11 @@ function BecomeDriver() {
   const [password, setPassword] = useState("");
   const [vehicalName, setVehicleName] = useState("");
   const [vehicalType, setVehicleType] = useState("");
-  const [vehicalModel, setVehicleModel] = useState("");
   const [vehicalSeats, setVehicleSeats] = useState("");
   const [pricePerKm, setPricePerKm] = useState("");
   const [lagguageType, setLagguageType] = useState("");
-  const [imageFile, setImageFile] = useState(null); // Changed to handle file object
+  const [imageFile, setImageFile] = useState(null); 
+  const [licenceImg, setLicenceImg] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,9 +59,9 @@ function BecomeDriver() {
       !pricePerKm ||
       !lagguageType ||
       !vehicalType ||
-      !vehicalModel ||
       !vehicalSeats ||
       !imageFile ||
+      !licenceImg||
       !selectedCategory
     ) {
       toast.error("Please fill in all required fields.");
@@ -70,6 +70,7 @@ function BecomeDriver() {
 
     const formData = new FormData();
     formData.append("imageUrl", imageFile);
+    formData.append("licenceImg", licenceImg);
     formData.append("vehicalName", vehicalName);
     formData.append("driverName", driverName);
     formData.append("driverStatues", "Pending"); // Default status
@@ -79,7 +80,6 @@ function BecomeDriver() {
     formData.append("driverAddress", driverAddress);
     formData.append("driverPhone", driverPhone);
     formData.append("vehicalType", vehicalType);
-    formData.append("vehicalModel", vehicalModel);
     formData.append("catType", selectedCategory.catType);
     formData.append("noOfSeats", vehicalSeats);
     formData.append("lagguageType", lagguageType);
@@ -298,17 +298,17 @@ function BecomeDriver() {
                   <div>
                     <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="vehicleModel">
                       <FaCar className="inline-block mr-2 text-secondery" />
-                      Vehicle Model
+                      Licence Image
                     </label>
                     <input
-                      type="text"
-                      id="vehicleModel"
-                      name="vehicleModel"
-                      value={vehicalModel}
-                      onChange={(e) => setVehicleModel(e.target.value)}
+                      type="file"
+                      id="Licence"
+                      name="Licence"
+                      onChange={(e) => setLicenceImg(e.target.files[0])}
                       className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
-                      placeholder="Enter vehicle model"
+                      placeholder="Enter Licence"
                       required
+                      multiple
                     />
                   </div>
                   <div>
@@ -379,6 +379,7 @@ function BecomeDriver() {
                       className="w[100px] p-2 border border-gray-300 rounded-lg font-secondary focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
                       placeholder="Enter Vehicle"
                       required
+                      multiple
                     />
                   </div>
                 </div>
