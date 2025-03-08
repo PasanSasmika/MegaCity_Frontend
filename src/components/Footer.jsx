@@ -39,9 +39,9 @@ const Footer = () => {
           <div className='font-secondary text-xl'>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-200 hover:text-green-400 transition-colors duration-200">
+                <Link to="/"><a  className="text-gray-200 hover:text-green-400 transition-colors duration-200">
                   Home
-                </a>
+                </a></Link>
               </li>
               <li>
                 <a href="#" className="text-gray-200 hover:text-green-400 transition-colors duration-200">

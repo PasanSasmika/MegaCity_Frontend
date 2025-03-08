@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { FiSettings, FiLogOut, FiSearch } from "react-icons/fi";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaCarSide, FaRegUserCircle } from "react-icons/fa";
 import { BsGrid } from "react-icons/bs";
 import { RiHome3Line } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa6";
@@ -11,6 +11,7 @@ import Drivers from './Drivers';
 import Customers from './Customers';
 import AddAdmins from './AddAdmins';
 import Admin from './Admin';
+import CategoryAdd from './CategoryAdd';
 
 function AdminHome() {
   const [isOpen, setIsOpen] = useState(true);
@@ -26,7 +27,7 @@ function AdminHome() {
           </button>
         </div>
         <div className="mt-6 flex flex-col gap-6">
-  <Link to="/" className="flex items-center gap-4 text-lg hover:text-gray-400">
+  <Link to="/adminpage/dashboard" className="flex items-center gap-4 text-lg hover:text-gray-400">
     <FaRegUserCircle size={24} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Esther Howard</span>
   </Link>
@@ -46,6 +47,10 @@ function AdminHome() {
     <MdOutlineAdminPanelSettings size={20} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Admins</span>
   </Link>
+  <Link to="/adminpage/vehicalcategory" className="flex items-center gap-4 text-lg hover:text-gray-400">
+    <FaCarSide size={20} />
+    <span className={`${isOpen ? "block" : "hidden"}`}>Vehical Category</span>
+  </Link>
   <Link to="/logout" className="flex items-center gap-4 text-lg hover:text-gray-400 mt-auto">
     <FiLogOut size={20} />
     <span className={`${isOpen ? "block" : "hidden"}`}>Logout</span>
@@ -61,11 +66,12 @@ function AdminHome() {
         </div>
         <div className="mt-4 p-6 bg-white rounded-lg shadow-lg h-[80vh]">
           <Routes path="/*">
-            <Route path="/" element={<h1 className="text-center text-xl">Dashboard </h1>} />
+            <Route path="/adminpage/dashboard" element={<h1 className="text-center text-xl">Dashboard </h1>} />
             <Route path="/drivers" element={<Drivers/>} />
             <Route path="/customers" element={<Customers/>} />
             <Route path="/admin" element={<AddAdmins/>} />
             <Route path="/addAdmin" element={<Admin/>} />
+            <Route path="/vehicalcategory" element={<CategoryAdd/>} />
           </Routes>
         </div>
       </div>

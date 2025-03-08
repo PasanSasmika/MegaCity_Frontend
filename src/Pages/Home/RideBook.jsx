@@ -27,7 +27,7 @@ function RideBook() {
       state: {
         name: vehical.vehicalName,
         type: vehical.vehicalType,
-        seats: vehical.vehicalSeats,
+        seats: vehical.noOfSeats,
         price: vehical.pricePerKm,
         Id: vehical.driverID
       },
@@ -54,11 +54,12 @@ function RideBook() {
               <h1 className="font-primary font-bold text-2xl text-gray-700 flex items-center gap-2">
                {vehical.vehicalType}
               </h1>
-              <p className="text-lg font-secondary text-gray-600 mt-1">Seats: {vehical.vehicalSeats}</p>
+              <p className="text-lg font-secondary text-gray-600 mt-1">Seats: {vehical.noOfSeats}</p>
+              <p className="text-lg font-secondary text-gray-600 mt-1">Lagguage Size: {vehical.lagguageType}</p>
               <p hidden >{vehical.driverID}</p>
               <p className="text-lg font-secondary text-gray-600 mt-1">Price per KM:  {vehical.pricePerKm}/=</p>
               <div className={`mt-4 px-4 py-2 rounded-full font-secondary text-white ${vehical.driverStatues ? 'bg-green-600' : 'bg-red-600'} flex items-center gap-2`}>
-                {vehical.driverStatues ? <IoCheckmarkCircle /> : <IoCloseCircle />} {vehical.driverStatues ? 'Available' : 'Unavailable'}
+                {vehical.driverStatues ? <IoCheckmarkCircle /> : <IoCloseCircle />} {vehical.driverStatues ? 'Pending' : 'Unavailable'}
               </div>
               {vehical.driverStatues && (
                 <button className="mt-4 px-6 py-2 bg-primary text-white font-primary font-bold rounded-full hover:bg-primary/80 transition duration-300"

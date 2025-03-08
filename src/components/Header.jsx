@@ -32,10 +32,10 @@ function Header() {
 
         {/* Navigation Links */}
         <nav className='flex space-x-8 font-secondery items-center font-secondary justify-center text-[18px]'>
-          <a href='#home' className='relative text-accent hover:text-primary transition duration-300 group'>
+         <Link to="/"> <a className='relative text-accent hover:text-primary transition duration-300 group'>
             Home
             <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full'></span>
-          </a>
+          </a></Link>
           <a href='#about' className='relative text-accent hover:text-primary transition duration-300 group'>
             About
             <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full'></span>

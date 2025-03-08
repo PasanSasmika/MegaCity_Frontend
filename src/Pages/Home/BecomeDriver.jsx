@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUser, FaMapMarkerAlt, FaPhone, FaEnvelope, FaCar, FaKey, FaCheckCircle, FaImage } from "react-icons/fa";
 import image from '/taxiii.jpg'; // Import the local image
 import toast from "react-hot-toast";
+import { FaBagShopping } from "react-icons/fa6";
 
 function BecomeDriver() {
   const [categories, setCategories] = useState([]);
@@ -14,13 +15,13 @@ function BecomeDriver() {
   const [driverEmail, setDriverEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [driverStatues, setDriverStatus] = useState("");
   const [vehicalName, setVehicleName] = useState("");
   const [vehicalType, setVehicleType] = useState("");
   const [vehicalModel, setVehicleModel] = useState("");
   const [vehicalSeats, setVehicleSeats] = useState("");
   const [pricePerKm, setPricePerKm] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [lagguageType, setLagguageType] = useState("");
+  const [imageFile, setImageFile] = useState(null); // Changed to handle file object
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,27 +42,11 @@ function BecomeDriver() {
     setVehicleSeats(category.noOfSeats);
     setVehicleType(category.catType);
     setPricePerKm(category.pricePerKm);
+    setLagguageType(category.lagguageType);
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    const driverDetails = {
-      driverName,
-      driverAddress,
-      driverPhone,
-      imageUrl,
-      driverEmail,
-      userName,
-      password,
-      driverStatues,
-      vehicalName,
-      vehicalType,
-      vehicalModel,
-      vehicalSeats,
-      pricePerKm,
-      categoryId: selectedCategory ? selectedCategory.catID : null, // Include the selected category ID
-    };
 
     if (
       !driverName ||
@@ -70,35 +55,52 @@ function BecomeDriver() {
       !driverEmail ||
       !userName ||
       !password ||
-      !driverStatues ||
       !vehicalName ||
       !pricePerKm ||
+      !lagguageType ||
       !vehicalType ||
       !vehicalModel ||
       !vehicalSeats ||
-      !imageUrl ||
+      !imageFile ||
       !selectedCategory
     ) {
       toast.error("Please fill in all required fields.");
       return;
     }
 
+    const formData = new FormData();
+    formData.append("imageUrl", imageFile);
+    formData.append("vehicalName", vehicalName);
+    formData.append("driverName", driverName);
+    formData.append("driverStatues", "Pending"); // Default status
+    formData.append("driverEmail", driverEmail);
+    formData.append("userName", userName);
+    formData.append("password", password);
+    formData.append("driverAddress", driverAddress);
+    formData.append("driverPhone", driverPhone);
+    formData.append("vehicalType", vehicalType);
+    formData.append("vehicalModel", vehicalModel);
+    formData.append("catType", selectedCategory.catType);
+    formData.append("noOfSeats", vehicalSeats);
+    formData.append("lagguageType", lagguageType);
+    formData.append("pricePerKm", pricePerKm);
+
     try {
-      await axios.post(
-        "http://localhost:8080/auth/createdriver",
-        driverDetails
-      );
+      await axios.post("http://localhost:8080/auth/createdriver", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       navigate("/");
       toast.success("Driver Registration successful");
     } catch (error) {
-      toast.error("Failed to register driver!");
+      console.log(error);
+      toast.error("Failed to register driver. Please try again.");
     }
   }
 
   return (
-    <div
-      className="relative min-h-screen w-full"
-    >
+    <div className="relative min-h-screen w-full">
       <div className="absolute inset-0"></div>
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
         <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-5xl">
@@ -106,13 +108,12 @@ function BecomeDriver() {
             Become a Driver with Us
           </h1>
           <p className="text-lg font-secondary text-gray-700 text-center mb-6">
-            Fill out the form below to apply and start driving with us. It's
-            easy and quick!
+            Fill out the form below to apply and start driving with us. It's easy and quick!
           </p>
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div className="flex flex-col md:flex-row gap-8">
               {/* Left Section: Category Selection */}
-              <div className="flex flex-col gap-4 p-8 rounded-xl  w-[300px]">
+              <div className="flex flex-col gap-4 p-8 rounded-xl w-[300px]">
                 {categories.map((category) => (
                   <label
                     key={category.catID}
@@ -139,6 +140,9 @@ function BecomeDriver() {
                         Seats: {category.noOfSeats}
                       </span>
                       <span className="text-sm font-secondary text-gray-600">
+                        Lagguage Type: {category.lagguageType}
+                      </span>
+                      <span className="text-sm font-secondary text-gray-600">
                         Price per KM: {category.pricePerKm}
                       </span>
                     </div>
@@ -151,11 +155,8 @@ function BecomeDriver() {
                 {/* Row 1 */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="driverName"
-                    >
-                      <FaUser className="inline-block mr-2  text-secondery" />
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="driverName">
+                      <FaUser className="inline-block mr-2 text-secondery" />
                       Driver Name
                     </label>
                     <input
@@ -170,10 +171,7 @@ function BecomeDriver() {
                     />
                   </div>
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px]  font-medium mb-2"
-                      htmlFor="driverAddress"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="driverAddress">
                       <FaMapMarkerAlt className="inline-block mr-2 text-secondery" />
                       Driver Address
                     </label>
@@ -189,13 +187,10 @@ function BecomeDriver() {
                     />
                   </div>
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="driverPhone"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="driverPhone">
                       <FaPhone className="inline-block mr-2 text-secondery" />
                       Driver Phone
-                    </label> 
+                    </label>
                     <input
                       type="tel"
                       id="driverPhone"
@@ -212,10 +207,7 @@ function BecomeDriver() {
                 {/* Row 2 */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="driverEmail"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="driverEmail">
                       <FaEnvelope className="inline-block mr-2 text-secondery" />
                       Driver Email
                     </label>
@@ -225,16 +217,13 @@ function BecomeDriver() {
                       name="driverEmail"
                       value={driverEmail}
                       onChange={(e) => setDriverEmail(e.target.value)}
-                      className="w-full p-2 border border-gray-300 rounded-lg  font-secondary focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      className="w-full p-2 border border-gray-300 rounded-lg font-secondary focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
                       placeholder="Enter your email address"
                       required
                     />
                   </div>
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="userName"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="userName">
                       <FaUser className="inline-block mr-2 text-secondery" />
                       Username
                     </label>
@@ -250,10 +239,7 @@ function BecomeDriver() {
                     />
                   </div>
                   <div>
-                    <label
-                      className="block text-gray-700 font-medium mb-2"
-                      htmlFor="password"
-                    >
+                    <label className="block text-gray-700 font-medium mb-2" htmlFor="password">
                       <FaKey className="inline-block mr-2 text-secondery" />
                       Password
                     </label>
@@ -273,29 +259,7 @@ function BecomeDriver() {
                 {/* Row 3 */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="driverStatus"
-                    >
-                      <FaCheckCircle className="inline-block mr-2 text-secondery" />
-                      Driver Status 
-                    </label>
-                    <input
-                      type="text"
-                      id="driverStatus"
-                      name="driverStatus"
-                      value={driverStatues}
-                      onChange={(e) => setDriverStatus(e.target.value)}
-                      className="w-full p-2 border border-gray-300 font-secondary  rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
-                      placeholder="Enter driver status"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="vehicleName"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="vehicleName">
                       <FaCar className="inline-block mr-2 text-secondery" />
                       Vehicle Name
                     </label>
@@ -311,12 +275,9 @@ function BecomeDriver() {
                     />
                   </div>
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="vehicleType"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="vehicleType">
                       <FaCar className="inline-block mr-2 text-secondery" />
-                      Vehicle Type 
+                      Vehicle Type
                     </label>
                     <input
                       type="text"
@@ -335,12 +296,9 @@ function BecomeDriver() {
                 {/* Row 4 */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="vehicleModel"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="vehicleModel">
                       <FaCar className="inline-block mr-2 text-secondery" />
-                      Vehicle Model 
+                      Vehicle Model
                     </label>
                     <input
                       type="text"
@@ -354,10 +312,7 @@ function BecomeDriver() {
                     />
                   </div>
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="vehicleSeats"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="vehicleSeats">
                       <FaCar className="inline-block mr-2 text-secondery" />
                       Vehicle Seats
                     </label>
@@ -374,17 +329,31 @@ function BecomeDriver() {
                     />
                   </div>
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="price KM"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="lagguageType">
+                      <FaBagShopping className="inline-block mr-2 text-secondery" />
+                      Lagguage size
+                    </label>
+                    <input
+                      type="text"
+                      id="lagguageType"
+                      name="lagguageType"
+                      value={lagguageType}
+                      onChange={(e) => setLagguageType(e.target.value)}
+                      className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Lagguage size"
+                      required
+                      disabled
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="pricePerKm">
                       <FaCar className="inline-block mr-2 text-secondery" />
-                      Price per KM 
+                      Price per KM
                     </label>
                     <input
                       type="number"
-                      id="price KM"
-                      name="set price KM"
+                      id="pricePerKm"
+                      name="pricePerKm"
                       value={pricePerKm}
                       onChange={(e) => setPricePerKm(e.target.value)}
                       className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
@@ -398,21 +367,17 @@ function BecomeDriver() {
                 {/* Row 5 */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label
-                      className="block text-gray-700 font-secondary text-[17px] font-medium mb-2"
-                      htmlFor="imageUrl"
-                    >
+                    <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="imageUrl">
                       <FaImage className="inline-block mr-2 text-secondery" />
-                      Image URL 
+                      Vehicle Images
                     </label>
                     <input
-                      type="text"
+                      type="file"
                       id="imageUrl"
                       name="imageUrl"
-                      value={imageUrl}
-                      onChange={(e) => setImageUrl(e.target.value)}
-                      className="w-full p-2 border border-gray-300 rounded-lg font-secondary focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
-                      placeholder="Enter image URL"
+                      onChange={(e) => setImageFile(e.target.files[0])} // Updated to handle file object
+                      className="w[100px] p-2 border border-gray-300 rounded-lg font-secondary focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
+                      placeholder="Enter Vehicle"
                       required
                     />
                   </div>
@@ -425,7 +390,6 @@ function BecomeDriver() {
               <button
                 type="submit"
                 className="bg-primary font-primary text-accent text-lg font-bold px-8 py-2 rounded-lg hover:shadow-xl transform transition duration-300 hover:scale-105"
-                onClick={handleSubmit}
               >
                 Submit Application
               </button>

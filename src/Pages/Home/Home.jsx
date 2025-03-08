@@ -1,43 +1,50 @@
-import React from 'react'
-import videoPath from '/taxi.mp4'
-import { Link } from 'react-router-dom'
-
+import React from 'react';
+import videoPath from '/img.jpg'; // Ensure this path is correct in your project
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
     <div className="w-full h-screen relative overflow-hidden">
-    {/* Background Video */}
-    <video
-      src={videoPath} // Replace `videoPath` with the actual path to your video
-      autoPlay
-      loop
-      muted
-      className="w-full h-full object-cover"
-    ></video>
+      {/* Background Video */}
+      <img
+        src={videoPath}
+        autoPlay
+        loop
+        muted
+        className="w-full h-full object-cover transform scale-105" 
+      />
 
-    {/* Overlay for Transparency */}
-    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/95 via-transparent to-black/95 z-10">
-      <div className="flex flex-col justify-center items-center h-full space-y-4 text-center z-20">
-        {/* Main Heading */}
-        <div className='w-[900px] mt-16 h-[330px] flex flex-col justify-center items-center rounded-lg bg-[#0b0505ea]'>
-        <h1 className="text-white text-5xl md:text-6xl font-primary font-extrabold tracking-wide
- px-4 sm:px-12">
-        Enjoy your comfortable trip <span className='text-primary'>.</span>
-        </h1>
-        <p className="text-white  font-secondary font-medium text-[22px] mt-9">
-          Enjoy Your Comfortable Trip with Our Reliable Service
-        </p>
-       
-        <div>
-         <Link to="/ride"><button className="bg-secondary border-2 border-primary mt-9 font-secondary text-white py-3 px-6 rounded-full text-[16x]">
-            Book a Ride
-          </button></Link> 
+      {/* Overlay with Gradient */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/90 via-black/50 to-black/90 z-10">
+        <div className="flex flex-col justify-center items-center h-full text-center z-20 px-4">
+          {/* Content Container */}
+          <div className="w-full max-w-[900px] mt-16 bg-[#0b0505ea] rounded-3xl shadow-2xl p-8 md:p-12 flex flex-col justify-center items-center transform transition-all duration-700 ease-out animate-fadeIn">
+            {/* Main Heading */}
+            <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-primary font-extrabold tracking-wider leading-tight">
+              Enjoy Your Comfortable Trip{' '}
+              <span className="text-primary relative">
+                .
+              </span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="text-white font-secondary text-lg md:text-[22px] mt-6 max-w-lg leading-relaxed opacity-90">
+              Experience a seamless journey with our reliable, top-tier service.
+            </p>
+
+            {/* Call to Action Button */}
+            <div className="mt-10">
+              <Link to="/ride">
+                <button className=" border-2 border-primary text-white font-secondary py-3 px-8 rounded-full text-lg md:text-xl shadow-lg hover:bg-transparent hover:text-primary hover:border-secondery transition-all duration-300">
+                  Book a Ride
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-      </div>
     </div>
-  </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
