@@ -63,8 +63,18 @@ function BecomeDriver() {
       !imageFile ||
       !licenceImg||
       !selectedCategory
-    ) {
+    ){
       toast.error("Please fill in all required fields.");
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(driverEmail)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (driverPhone.length < 10) {
+      toast.error("Phone number must be at least 10 digits.");
       return;
     }
 
