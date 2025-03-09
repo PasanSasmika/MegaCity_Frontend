@@ -310,7 +310,7 @@ const BookingFormWithMap = () => {
           )}
           {totalPrice && (
             <p className="mt-4 text-lg font-semibold text-blue-800">
-              Total Price: <span className="text-gray-700">${totalPrice}</span>
+              Total Price: <span className="text-gray-700">Rs {totalPrice}</span>
             </p>
           )}
           <button

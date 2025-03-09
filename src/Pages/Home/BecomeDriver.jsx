@@ -289,16 +289,9 @@ function BecomeDriver() {
                       <FaCar className="inline-block mr-2 text-secondery" />
                       Vehicle Type
                     </label>
-                    <input
-                      type="text"
-                      id="vehicleType"
-                      name="vehicleType"
-                      value={vehicalType}
-                      onChange={(e) => setVehicleType(e.target.value)}
+                    <input type="text"id="vehicleType"name="vehicleType" value={vehicalType} onChange={(e) => setVehicleType(e.target.value)}
                       className="w-full p-2 border border-gray-300 font-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f0db2e]"
-                      placeholder="Enter vehicle type"
-                      required
-                      disabled
+                      placeholder="Enter vehicle type" required disabled
                     />
                   </div>
                 </div>
