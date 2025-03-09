@@ -13,8 +13,8 @@ function BecomeDriver() {
   const [driverAddress, setDriverAddress] = useState("");
   const [driverPhone, setDriverPhone] = useState("");
   const [driverEmail, setDriverEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [password, setPassword] = useState("");
   const [vehicalName, setVehicleName] = useState("");
   const [vehicalType, setVehicleType] = useState("");
   const [vehicalSeats, setVehicleSeats] = useState("");
@@ -25,7 +25,6 @@ function BecomeDriver() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch categories from the API
     axios
       .get("http://localhost:8080/api/category")
       .then((response) => {
@@ -53,8 +52,8 @@ function BecomeDriver() {
       !driverAddress ||
       !driverPhone ||
       !driverEmail ||
-      !userName ||
-      !password ||
+      // !userName ||
+      // !password ||
       !vehicalName ||
       !pricePerKm ||
       !lagguageType ||
@@ -85,8 +84,8 @@ function BecomeDriver() {
     formData.append("driverName", driverName);
     formData.append("driverStatues", "Pending"); // Default status
     formData.append("driverEmail", driverEmail);
-    formData.append("userName", userName);
-    formData.append("password", password);
+    // formData.append("userName", userName);
+    // formData.append("password", password);
     formData.append("driverAddress", driverAddress);
     formData.append("driverPhone", driverPhone);
     formData.append("vehicalType", vehicalType);
@@ -232,7 +231,7 @@ function BecomeDriver() {
                       required
                     />
                   </div>
-                  <div>
+                  {/* <div>
                     <label className="block text-gray-700 font-secondary text-[17px] font-medium mb-2" htmlFor="userName">
                       <FaUser className="inline-block mr-2 text-secondery" />
                       Username
@@ -247,8 +246,8 @@ function BecomeDriver() {
                       placeholder="Enter a username"
                       required
                     />
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <label className="block text-gray-700 font-medium mb-2" htmlFor="password">
                       <FaKey className="inline-block mr-2 text-secondery" />
                       Password
@@ -263,7 +262,7 @@ function BecomeDriver() {
                       placeholder="Enter your password"
                       required
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Row 3 */}

@@ -14,12 +14,12 @@ import Admin from './Admin';
 import CategoryAdd from './CategoryAdd';
 
 function AdminHome() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="w-full h-screen flex bg-gray-100">
       {/* Sidebar */}
-      <div className={`h-full bg-gradient-to-b from-gray-800 to-black text-white p-6 transition-all ${isOpen ? "w-64" : "w-20"}`}>
+      <div className={` bg-gradient-to-b from-gray-800 to-black text-white p-6 transition-all ${isOpen ? "w-64" : "w-20"}`}>
         <div className="flex items-center justify-between">
           <h1 className={`text-xl font-bold transition-all ${isOpen ? "block" : "hidden"}`}>ADMIN PANEL</h1>
           <button onClick={() => setIsOpen(!isOpen)} className="text-white">
@@ -64,7 +64,7 @@ function AdminHome() {
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold">Welcome back</h1>
         </div>
-        <div className="mt-4 p-6 bg-white rounded-lg shadow-lg h-[80vh]">
+        <div className="mt-4 p-6  h-[80vh]">
           <Routes path="/*">
             <Route path="/adminpage/dashboard" element={<h1 className="text-center text-xl">Dashboard </h1>} />
             <Route path="/drivers" element={<Drivers/>} />
