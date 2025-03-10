@@ -105,7 +105,7 @@ function BecomeDriver() {
         },
       });
       navigate("/");
-      toast.success("Driver Registration successful");
+      toast.success("Application Submit Successfull..!");
     } catch (error) {
       console.log(error);
       toast.error("Failed to register driver. Please try again.");
