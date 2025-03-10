@@ -44,33 +44,36 @@ function RideBook() {
       </div>
 
       <div className="flex w-full items-center justify-center gap-8 mt-24 flex-wrap">
-        {vehicals.map((vehical, index) => (
-          <div key={vehical.id || index} className="w-[390px] bg-gray-100 shadow-lg rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300">
-            <img src={vehical.imageUrl} alt={vehical.vehicalName} className="w-full h-48 object-cover rounded-xl" />
-            <div className="mt-4 flex flex-col items-center">
-              <h1 className="font-primary font-bold text-3xl text-gray-900 flex items-center gap-2">
-                {vehical.vehicalName}
-              </h1>
-              <h1 className="font-primary font-bold text-2xl text-gray-700 flex items-center gap-2">
-               {vehical.vehicalType}
-              </h1>
-              <p className="text-lg font-secondary text-gray-600 mt-1">Seats: {vehical.noOfSeats}</p>
-              <p className="text-lg font-secondary text-gray-600 mt-1">Lagguage Size: {vehical.lagguageType}</p>
-              <p hidden >{vehical.driverID}</p>
-              <p className="text-lg font-secondary text-gray-600 mt-1">Price per KM:  {vehical.pricePerKm}/=</p>
-              <div className={`mt-4 px-4 py-2 rounded-full font-secondary text-white ${vehical.driverStatues ? 'bg-green-600' : 'bg-red-600'} flex items-center gap-2`}>
-                {vehical.driverStatues ? <IoCheckmarkCircle /> : <IoCloseCircle />} {vehical.driverStatues ? 'Pending' : 'Unavailable'}
+        {vehicals
+          .filter((vehical) => vehical.driverStatues === "active") // Only show vehicles with driverStatues as "active"
+          .map((vehical, index) => (
+            <div key={vehical.id || index} className="w-[390px] bg-gray-100 shadow-lg rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300">
+              <img src={vehical.imageUrl} alt={vehical.vehicalName} className="w-full h-48 object-cover rounded-xl" />
+              <div className="mt-4 flex flex-col items-center">
+                <h1 className="font-primary font-bold text-3xl text-gray-900 flex items-center gap-2">
+                  {vehical.vehicalName}
+                </h1>
+                <h1 className="font-primary font-bold text-2xl text-gray-700 flex items-center gap-2">
+                  {vehical.vehicalType}
+                </h1>
+                <p className="text-lg font-secondary text-gray-600 mt-1">Seats: {vehical.noOfSeats}</p>
+                <p className="text-lg font-secondary text-gray-600 mt-1">Lagguage Size: {vehical.lagguageType}</p>
+                <p hidden>{vehical.driverID}</p>
+                <p className="text-lg font-secondary text-gray-600 mt-1">Price per KM: {vehical.pricePerKm}/=</p>
+                <div className={`mt-4 px-4 py-2 rounded-full font-secondary text-white ${vehical.driverStatues === "active" ? 'bg-green-600' : 'bg-red-600'} flex items-center gap-2`}>
+                  {vehical.driverStatues === "active" ? <IoCheckmarkCircle /> : <IoCloseCircle />} {vehical.driverStatues}
+                </div>
+                {vehical.driverStatues === "active" && (
+                  <button
+                    className="mt-4 px-6 py-2 bg-primary text-white font-primary font-bold rounded-full hover:bg-primary/80 transition duration-300"
+                    onClick={() => click(vehical)}
+                  >
+                    Book This
+                  </button>
+                )}
               </div>
-              {vehical.driverStatues && (
-                <button className="mt-4 px-6 py-2 bg-primary text-white font-primary font-bold rounded-full hover:bg-primary/80 transition duration-300"
-                  onClick={() => click(vehical)}
-                >
-                  Book This
-                </button>
-              )}
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

@@ -56,48 +56,48 @@ function PendingBookings() {
               <div className="flex-1 border-r pr-6">
                 <div className="flex items-center space-x-2">
                   <FaMapMarkerAlt className="text-green-500" />
-                  <h4 className="text-md font-medium text-gray-700">Pick Location</h4>
+                  <h4 className="text-md font-primary font-medium text-gray-700">Pick Location</h4>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">{booking.pickupLocation}</p>
+                <p className="text-sm font-secondary text-gray-600 mt-2">{booking.pickupLocation}</p>
               </div>
 
               {/* Drop Location */}
               <div className="flex-1 border-r pr-6">
                 <div className="flex items-center space-x-2">
                   <FaMapMarkerAlt className="text-red-500" />
-                  <h4 className="text-md font-medium text-gray-700">Drop Location</h4>
+                  <h4 className="text-md font-primary font-medium text-gray-700">Drop Location</h4>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">{booking.dropLocation}</p>
+                <p className="text-sm font-secondary text-gray-600 mt-2">{booking.dropLocation}</p>
               </div>
 
               {/* Date & Time */}
               <div className="flex-1 border-r pr-6">
                 <div className="flex items-center space-x-2">
                   <FaCalendarAlt className="text-purple-500" />
-                  <h4 className="text-md font-medium text-gray-700">Date & Time</h4>
+                  <h4 className="text-md font-primary font-medium text-gray-700">Date & Time</h4>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">{booking.date} at {booking.time}</p>
+                <p className="text-sm font-secondary text-gray-600 mt-2">{booking.date} at {booking.time}</p>
               </div>
 
               {/* Trip Details */}
               <div className="flex-1 border-r pr-6">
                 <div className="flex items-center space-x-2">
                   <FaCar className="text-indigo-500" />
-                  <h4 className="text-md font-medium text-gray-700">Trip Details</h4>
+                  <h4 className="text-md font-primary font-medium text-gray-700">Trip Details</h4>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">Distance: {booking.distance}</p>
-                <p className="text-sm text-gray-600">Total: {booking.total}</p>
+                <p className="text-sm font-primary text-gray-600 mt-2">Distance: {booking.distance}</p>
+                <p className="text-sm font-secondary text-gray-600">Total: {booking.total}</p>
               </div>
 
               {/* Customer Details */}
               <div className="flex-1 border-r pr-6">
                 <div className="flex items-center space-x-2">
                   <FaUser className="text-yellow-500" />
-                  <h4 className="text-md font-medium text-gray-700">Customer Details</h4>
+                  <h4 className="text-md font-primary font-medium text-gray-700">Customer Details</h4>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">{booking.customerName}</p>
-                <p className="text-sm text-gray-600">{booking.email}</p>
-                <p className="text-sm text-gray-600">{booking.phone}</p>
+                <p className="text-sm font-secondary text-gray-600 mt-2">{booking.customerName}</p>
+                <p className="text-sm font-secondary text-gray-600">{booking.email}</p>
+                <p className="text-sm font-secondary text-gray-600">{booking.phone}</p>
               </div>
 
               
@@ -106,9 +106,9 @@ function PendingBookings() {
               <div className="flex-1">
                 <div className="flex items-center space-x-2">
                   <FaClock className="text-pink-500" />
-                  <h4 className="text-md font-medium text-gray-700">Status</h4>
+                  <h4 className="text-md font-primary font-medium text-gray-700">Status</h4>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">{booking.bookingStatus}</p>
+                <p className="text-sm font-secondary text-gray-600 mt-2">{booking.bookingStatus}</p>
               </div>
             </div>
           </div>

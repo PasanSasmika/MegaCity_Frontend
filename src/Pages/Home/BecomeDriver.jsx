@@ -22,17 +22,21 @@ function BecomeDriver() {
   const [lagguageType, setLagguageType] = useState("");
   const [imageFile, setImageFile] = useState(null); 
   const [licenceImg, setLicenceImg] = useState(null);
+  const [catStage, setCatStage] = useState("loading");
   const navigate = useNavigate();
 
   useEffect(() => {
+    if(catStage== "loading"){
     axios
       .get("http://localhost:8080/api/category")
       .then((response) => {
         setCategories(response.data);
+        setCatStage("loaded")
       })
       .catch((error) => {
         console.error("There was an error fetching the categories!", error);
       });
+    }
   }, []);
 
   const handleSelectCategory = (category) => {
@@ -122,7 +126,7 @@ function BecomeDriver() {
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div className="flex flex-col md:flex-row gap-8">
               {/* Left Section: Category Selection */}
-              <div className="flex flex-col gap-4 p-8 rounded-xl w-[300px]">
+             {catStage == "loaded"? <div className="flex flex-col gap-4 p-8 rounded-xl w-[300px]">
                 {categories.map((category) => (
                   <label
                     key={category.catID}
@@ -157,7 +161,9 @@ function BecomeDriver() {
                     </div>
                   </label>
                 ))}
-              </div>
+              </div>: <div>
+                <h1>Loading.....</h1>
+                </div>}
 
               {/* Right Section: Form Fields */}
               <div className="space-y-5 flex-1">
