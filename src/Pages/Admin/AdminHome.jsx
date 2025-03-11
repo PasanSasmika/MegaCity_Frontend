@@ -12,8 +12,12 @@ import Drivers from './Drivers';
 import Customers from './Customers';
 import AddAdmins from './AddAdmins';
 import Admin from './Admin';
-import CategoryAdd from './CategoryAdd';
 import toast from 'react-hot-toast';
+import AdminDashboard from './AdminDashboard';
+import Category from './Category';
+import CategoryAdd from './CategoryAdd';
+import Error from '../../components/Error';
+
 
 function AdminHome() {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,13 +56,9 @@ function AdminHome() {
           </button>
         </div>
         <div className="mt-6 flex flex-col gap-6">
-          <Link to="/adminpage/dashboard" className="flex items-center gap-4 text-lg hover:text-gray-400">
-            <FaRegUserCircle size={24} />
-            <span className={`${isOpen ? "block" : "hidden"}`}>Esther Howard</span>
-          </Link>
-          <Link to="/defi" className="flex items-center gap-4 text-lg hover:text-gray-400">
+        <Link to="/adminpage/" className="flex items-center gap-4 text-lg hover:text-gray-400">
             <RiHome3Line size={24} />
-            <span className={`${isOpen ? "block" : "hidden"}`}>Home</span>
+            <span className={`${isOpen ? "block" : "hidden"}`}>Drivers</span>
           </Link>
           <Link to="/adminpage/drivers" className="flex items-center gap-4 text-lg hover:text-gray-400">
             <PiSteeringWheel size={24} />
@@ -92,13 +92,16 @@ function AdminHome() {
           <h1 className="text-2xl font-semibold">Welcome back</h1>
         </div>
         <div className="mt-4 p-6 h-[80vh]">
-          <Routes>
-            <Route path="/adminpage/dashboard" element={<h1 className="text-center text-xl">Dashboard</h1>} />
+        <Routes path="/">
+            <Route path="/" element={<AdminDashboard/>} />
             <Route path="/drivers" element={<Drivers />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/admin" element={<AddAdmins />} />
             <Route path="/addAdmin" element={<Admin />} />
-            <Route path="/vehicalcategory" element={<CategoryAdd />} />
+            <Route path="/vehicalcategory" element={<Category />} />
+            <Route path="/categoryadd" element={<CategoryAdd />} />
+            <Route path="/*" element={<Error/>} />
+
           </Routes>
         </div>
       </div>

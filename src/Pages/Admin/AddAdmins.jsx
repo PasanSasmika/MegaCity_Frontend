@@ -37,34 +37,26 @@ function AddAdmins() {
   }
 
   return (
-    <div className="p-6 bg-gray-100 h-[70vh]">
-      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">All Admins</h2>
-      <table className="min-w-full table-auto border-collapse shadow-lg bg-white rounded-lg">
-        <thead>
-          <tr className="bg-green-500 text-white text-left">
-            <th className="px-6 py-3">Admin ID</th>
-            <th className="px-6 py-3">Username</th>
-            <th className="px-6 py-3">Email</th>
-            <th className="px-6 py-3">Password</th>
-          </tr>
-        </thead>
-        <tbody>
-          {admins.map((admin) => (
-            <tr key={admin.id} className="hover:bg-gray-200">
-              <td className="px-6 py-4 border-t">{admin.adminID}</td>
-              <td className="px-6 py-4 border-t">{admin.userName}</td>
-              {/* Add more columns as needed */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="p-6 bg-gray-100 min-h-[70vh] ">
+      <h2 className="text-3xl font-semibold text-center  font-primary text-gray-800 mb-6">All Admins</h2>
+      
+      {/* Card Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {admins.map((admin) => (
+          <div key={admin.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+            <div className="text-lg font-semibold font-primary text-gray-800">Admin ID: <span className='font-secondary'> {admin.adminID}</span></div>
+            <div className="text-md text-gray-600 font-primary">Username: <span className='font-secondary'>{admin.userName}</span></div>
+            {/* Add more fields as needed */}
+          </div>
+        ))}
+      </div>
 
       {/* Plus Icon Button at the bottom */}
       <div className="flex justify-center mt-6">
         <button 
           className="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition"
         >
-         <Link to="/adminpage/addAdmin"><FaPlus size={20} /></Link> 
+          <Link to="/adminpage/addAdmin"><FaPlus size={20} /></Link> 
         </button>
       </div>
     </div>

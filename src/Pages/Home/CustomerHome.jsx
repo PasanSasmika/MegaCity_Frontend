@@ -8,6 +8,7 @@ import Contact from './Contact';
 import PreLoader from '../../components/PreLoader';
 import Footer from '../../components/Footer';
 import AboutUs from './AboutUs';
+import Error from '../../components/Error';
 
 
 function CustomerHome() {
@@ -44,19 +45,7 @@ function CustomerHome() {
                </main>
              }
            />
-           <Route path="/" element={<Home />} />
-           {/* <Route path="/productInfo/:id" element={<ProductOverview />} />
-           <Route path="/products/:category" element={<Category/>} />
-           <Route path="/cart" element={<Cart />} />
-           <Route path="/aboutus" element={<AboutUs/>} />
-           <Route path="/blogs" element={<Blogs/>} />
-           <Route path="/blogdata" element={<BlogInfo/>} />
-           <Route path="/faq" element={<Faq/>} />
-           <Route path="/shipping" element={<Shipping/>} />
-           <Route path="/contact" element={<Contact/>} />
-           <Route path="/profile" element={<MyProfile/>} />
-           <Route path="/review" element={<AddReview/>} />
-           <Route path="/*" element={<Error/>} /> */}
+          <Route path="/*" element= {<Error/>} />
          </Routes>
        </div>
      </div>

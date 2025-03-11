@@ -31,7 +31,7 @@ function CategoryAdd() {
         }
       );
       console.log(category)
-      navigate('/adminpage/dashboard');
+      navigate('/adminpage/vehicalcategory');
       toast.success('Category added successfully!');
     } catch (error) {
       toast.error('Failed to add Category!');

@@ -133,31 +133,30 @@ function Drivers() {
                 <button 
                   onClick={() => handleDeleteDriver(driver.driverID)}
                   className="text-red-600 hover:text-red-800" 
-                  title="Delete Driver"
-                >
+                  title="Delet Driver">
                   <FaTrash />
                 </button>
-                <h3 className="text-lg font-semibold text-gray-800">{driver.driverName}</h3>
+                <h3 className="text-lg font-semibold font-primary text-gray-800"> <span> {driver.driverName}</span> </h3>
                 <button
                   onClick={() => openModal(driver.driverID)}
-                  className="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-300 text-sm"
+                  className="px-3 py-1 bg-green-500 font-primary text-white rounded-md hover:bg-green-600 transition-colors duration-300 text-sm"
                 >
                   Set Credentials
                 </button>
               </div>
               <div className="space-y-2 text-gray-600 text-sm">
-                <p><span className="font-medium">Email:</span> {driver.driverEmail}</p>
-                <p><span className="font-medium">Phone:</span> {driver.driverPhone}</p>
-                <p> <span className="font-medium">Username:</span>{" "}
+                <p><span className="font-medium font-primary text-slate-900">Email:</span> <span> {driver.driverEmail}</span> </p>
+                <p><span className="font-medium font-primary text-slate-900">Phone:</span> <span> {driver.driverPhone}</span> </p>
+                <p> <span className="font-medium font-primary text-slate-900">Username:</span> <span> {" "}</span> 
                 {driver.userName ? (
-                  <span>{driver.userName}</span>) : ( <span className="text-red-500 italic">Add username</span> )}</p>
-                <p><span className="font-medium">Address:</span> {driver.driverAddress}</p>
-                <p><span className="font-medium">Vehicle:</span> {driver.vehicalName}</p>
-                <p><span className="font-medium">Vehicle Type:</span> {driver.vehicalType}</p>
-                <p><span className="font-medium">Category:</span> {driver.catType}</p>
-                <p><span className="font-medium">Seats:</span> {driver.noOfSeats}</p>
-                <p><span className="font-medium">Luggage Type:</span> {driver.lagguageType}</p>
-                <p><span className="font-medium">Price per Km:</span> {driver.pricePerKm}</p>
+                  <span>{driver.userName}</span>) : ( <span className="text-red-500 italic"> <span>Add username </span></span> )}</p>
+                <p><span className="font-medium font-primary text-slate-900">Address:</span> <span> {driver.driverAddress}</span> </p>
+                <p><span className="font-medium font-primary text-slate-900">Vehicle:</span> <span> {driver.vehicalName}</span> </p>
+                <p><span className="font-medium font-primary text-slate-900">Vehicle Type:</span> <span> {driver.vehicalType}</span> </p>
+                <p><span className="font-medium font-primary text-slate-900">Category:</span> <span> {driver.catType}</span> </p>
+                <p><span className="font-medium font-primary text-slate-900">Seats:</span> <span> {driver.noOfSeats}</span> </p>
+                <p><span className="font-medium font-primary text-slate-900">Luggage Type:</span> <span> {driver.lagguageType}</span></p>
+                <p><span className="font-medium font-primary text-slate-900">Price per Km:</span> <span> {driver.pricePerKm}</span> </p>
               </div>
               <div className="mt-4 flex space-x-2">
                 <div className="w-1/2">
