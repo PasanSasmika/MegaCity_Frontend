@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaCar, FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarAlt, FaClock } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -21,7 +21,7 @@ const BookingFormWithMap = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const location = useLocation();
-
+  const navigate = useNavigate();
   // Log location.state for debugging
   console.log("Location State:", location.state);
 
@@ -157,6 +157,7 @@ const BookingFormWithMap = () => {
 
       console.log("Booking successful:", response.data);
       toast.success("Booking successful!");
+      navigate("/")
     } catch (error) {
       console.error("Booking failed:", error);
       toast.error("Booking failed. Please try again.");

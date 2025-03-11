@@ -5,6 +5,8 @@ import { RiHome3Line } from "react-icons/ri";
 import { FaClipboardList, FaCheckCircle, FaTrash, FaStar, FaUser } from "react-icons/fa";
 import axios from 'axios';
 import PendingBookings from './PendingBookings';
+import { FiLogOut } from 'react-icons/fi';
+import toast from 'react-hot-toast';
 
 function AdminDashboard() {
   const [isOpen, setIsOpen] = useState(true);
@@ -50,6 +52,29 @@ function AdminDashboard() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:8080/auth/logout', null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+    } catch (error) {
+      console.error('Logout API error:', error);
+    } finally {
+      // Always clear storage and redirect
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('userId');
+      toast.success('Logout Successfully..!', {
+        duration: 2000, 
+      });
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 2000);
+    }
+  };
+
   return (
     <div className="w-full h-screen flex bg-gray-100">
       {/* Sidebar */}
@@ -85,6 +110,13 @@ function AdminDashboard() {
             <FaUser size={20} />
             <span className={`${isOpen ? "block" : "hidden"}`}>Profile</span>
           </Link>
+             <button 
+                      onClick={handleLogout}
+                      className="flex items-center gap-4 text-lg hover:text-gray-400 mt-auto"
+                    >
+                      <FiLogOut size={20} />
+                      <span className={`${isOpen ? "block" : "hidden"}`}>Logout</span>
+                    </button>
         </div>
       </div>
 
