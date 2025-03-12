@@ -165,7 +165,7 @@ const BookingFormWithMap = () => {
   };
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex w-full h-screen font-primary">
       {/* Left side: Map */}
       <div className="w-[30%] h-full">
         <div id="map" className="w-full h-full"></div>
@@ -198,7 +198,7 @@ const BookingFormWithMap = () => {
         {/* Booking Form Below */}
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Display driverID for debugging */}
-          <span >Driver ID: {Id}</span>
+          <span  hidden>Driver ID: {Id}</span>
 
           {/* Row 1: Pickup and Drop Locations */}
           <div className="flex gap-6">

@@ -36,18 +36,18 @@ function Header() {
             Home
             <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full'></span>
           </a></Link>
-          <a href='#about' className='relative text-accent hover:text-primary transition duration-300 group'>
+          <Link to="/about"><a className='relative text-accent hover:text-primary transition duration-300 group'>
             About
             <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full'></span>
-          </a>
-          <a href='#services' className='relative text-accent hover:text-primary transition duration-300 group'>
+          </a></Link>
+          <Link to="/service"><a className='relative text-accent hover:text-primary transition duration-300 group'>
             Services
             <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full'></span>
-          </a>
-          <a href='#contact' className='relative text-accent hover:text-primary transition duration-300 group'>
+          </a></Link>
+          <Link to="/contact"><a  className='relative text-accent hover:text-primary transition duration-300 group'>
             Contact
             <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full'></span>
-          </a>
+          </a></Link>
           <Link to="/driver" className='relative text-accent hover:text-primary transition duration-300 group'>
             Become a Driver
             <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full'></span>

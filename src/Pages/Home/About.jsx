@@ -1,5 +1,6 @@
 import React from 'react';
 import image from '/new.jpg'
+import Footer from '../../components/Footer';
 function About() {
   return (
     <div className="min-h-screen bg-white py-20 px-4 sm:px-8 lg:px-16">

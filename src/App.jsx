@@ -15,14 +15,13 @@ function App() {
   <>
    <Toaster/>
    <Routes>
-    <Route path='/' element ={<CustomerHome/>}/>
-    <Route path='/ride' element ={<RideBook/>}/>bookform
+    <Route path='/*' element ={<CustomerHome/>}/>
+    <Route path='/ride' element ={<RideBook/>}/>
     <Route path='/bookform' element ={<BookForm/>}/>
     <Route path='/driver' element ={<BecomeDriver/>}/>
     <Route path='/login' element ={<LoginPage/>}/>
     <Route path='/driverdashboard/*' element ={<DriverHome/>}/>
     <Route path='/adminpage/*' element ={<AdminHome/>}/>
-    <Route path="*" element={<Error />} />
 
    </Routes>
    </>

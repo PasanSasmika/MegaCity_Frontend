@@ -46,6 +46,9 @@ function CustomerHome() {
              }
            />
           <Route path="/*" element= {<Error/>} />
+          <Route path="/about" element= {<AboutUs/>} />
+          <Route path="/contact" element= {<Contact/>} />
+          <Route path="/service" element= {<About/>} />
          </Routes>
        </div>
      </div>

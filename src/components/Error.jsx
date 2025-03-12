@@ -1,65 +1,38 @@
 import React from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { motion } from 'framer-motion';
 
 function Error() {
   return (
-    <div className="w-full h-screen bg-secondery flex flex-col items-center justify-center p-28">
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 0.8,
-          type: 'spring',
-          stiffness: 120,
-          damping: 8
-        }}
-      >
-        <h1 className="text-6xl font-secondary md:text-8xl font-bold text-white mb-12 bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
-          Oops! You Missed the Turn!
-        </h1>
-      </motion.div>
-
-      <motion.div
-        initial={{ scale: 0, rotate: -30 }}
-        animate={{ 
-          scale: 1.1,
-          rotate: 0,
-          transition: {
-            type: 'spring',
-            stiffness: 150,
-            damping: 8,
-            delay: 0.3
-          }
-        }}
-        whileHover={{ scale: 1.2 }}
-        className="mb-12"
-      >
+    <div className="w-full min-h-screen bg-primary flex flex-col items-center justify-center p-4">
+      {/* Animation Container */}
+      <div className="w-[2000px] max-w-md mb-8">
         <DotLottieReact
-          src="https://lottie.host/c9759a4b-9118-43ae-9b68-2e2a511147c9/tsLxu81IT5.lottie"
+          src="https://lottie.host/828689a7-8fd0-4300-b535-16fa9d9deaeb/dcqoQvq7BM.lottie"
           loop
           autoplay
-          className="w-96 h-"
+          className="w-full h-auto"
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="mt-12"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ 
-          opacity: 1, 
-          x: 0,
-          transition: { 
-            delay: 0.7,
-            type: 'spring',
-            stiffness: 100
-          } 
-        }}
-      >
-        <p className="text-white text-2xl font-secondary animate-pulse">
-          Redirecting you back to the racetrack...
+      {/* Text Content */}
+      <div className="text-center space-y-4">
+        <h1 className="font-secondary text-4xl md:text-5xl font-bold text-gray-800">
+          404 - Taxi Took a Wrong Turn!
+        </h1>
+        <p className="font-secondary text-lg md:text-xl text-gray-600 max-w-lg">
+          Oops! Looks like our driver got lost in the digital highway. Don't worry, we'll get you back on track!
         </p>
-      </motion.div>
+        
+        {/* Home Button */}
+        <a
+          href="/"
+          className="inline-block mt-6 px-6 py-3 bg-blue-600 text-white font-secondary rounded-lg hover:bg-blue-700 transition-colors duration-300"
+        >
+          Take Me Home
+        </a>
+      </div>
+
+      {/* Optional Decorative Element */}
     </div>
   );
 }
