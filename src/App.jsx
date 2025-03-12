@@ -9,6 +9,7 @@ import DriverHome from './Pages/Driver/DriverHome'
 import { Toaster } from 'react-hot-toast'
 import CustomerHome from './Pages/Home/CustomerHome'
 import Error from './components/Error'
+import SignUp from './Pages/Home/SignUp'
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
     <Route path='/login' element ={<LoginPage/>}/>
     <Route path='/driverdashboard/*' element ={<DriverHome/>}/>
     <Route path='/adminpage/*' element ={<AdminHome/>}/>
-
+    <Route path='/signup' element ={<SignUp/>}/>
    </Routes>
    </>
   )

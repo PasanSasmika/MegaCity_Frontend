@@ -17,6 +17,8 @@ import AdminDashboard from './AdminDashboard';
 import Category from './Category';
 import CategoryAdd from './CategoryAdd';
 import Error from '../../components/Error';
+import { GoBookmarkFill } from "react-icons/go";
+import Bookings from './Bookings';
 
 
 function AdminHome() {
@@ -45,6 +47,36 @@ function AdminHome() {
     }
   };
 
+  const [user,setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    const token = localStorage.getItem("token");
+    if(!token){
+      toast.error("You are not vailde user. please login again.")
+      navigate("/login")
+      return;
+      
+    }
+    axios.get(import.meta.env.VITE_BACKEND_URL+ '/api/users',{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res)=>{
+      if(res.data.type!="admin"){
+        toast.error("Unauthorized access..!")
+        navigate("/login")
+      }else{
+        console.log(res.data)
+        setUser(res.data)
+      }
+    }).catch((err)=>{
+      console.log(err)
+      toast.error("Failed to fetch userData")
+      navigate("/login")
+    })
+  },[])
+
   return (
     <div className="w-full h-screen flex bg-gray-100">
       {/* Sidebar */}
@@ -72,6 +104,10 @@ function AdminHome() {
             <MdOutlineAdminPanelSettings size={20} />
             <span className={`${isOpen ? "block" : "hidden"}`}>Admins</span>
           </Link>
+          <Link to="/adminpage/bookings" className="flex items-center gap-4 text-lg hover:text-gray-400">
+            <GoBookmarkFill size={20} />
+            <span className={`${isOpen ? "block" : "hidden"}`}>Bookings</span>
+          </Link>
           <Link to="/adminpage/vehicalcategory" className="flex items-center gap-4 text-lg hover:text-gray-400">
             <FaCarSide size={20} />
             <span className={`${isOpen ? "block" : "hidden"}`}>Vehicle Category</span>
@@ -98,6 +134,7 @@ function AdminHome() {
             <Route path="/customers" element={<Customers />} />
             <Route path="/admin" element={<AddAdmins />} />
             <Route path="/addAdmin" element={<Admin />} />
+            <Route path="/bookings" element={<Bookings />} />
             <Route path="/vehicalcategory" element={<Category />} />
             <Route path="/categoryadd" element={<CategoryAdd />} />
             <Route path="/*" element={<Error/>} />
