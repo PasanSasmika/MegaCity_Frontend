@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FiSettings, FiLogOut, FiSearch } from "react-icons/fi";
 import { FaCarSide, FaRegUserCircle } from "react-icons/fa";
@@ -47,35 +47,8 @@ function AdminHome() {
     }
   };
 
-  const [user,setUser] = useState(null);
-  const navigate = useNavigate();
 
-  useEffect(()=>{
-    const token = localStorage.getItem("token");
-    if(!token){
-      toast.error("You are not vailde user. please login again.")
-      navigate("/login")
-      return;
-      
-    }
-    axios.get(import.meta.env.VITE_BACKEND_URL+ '/api/users',{
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((res)=>{
-      if(res.data.type!="admin"){
-        toast.error("Unauthorized access..!")
-        navigate("/login")
-      }else{
-        console.log(res.data)
-        setUser(res.data)
-      }
-    }).catch((err)=>{
-      console.log(err)
-      toast.error("Failed to fetch userData")
-      navigate("/login")
-    })
-  },[])
+
 
   return (
     <div className="w-full h-screen flex bg-gray-100">
