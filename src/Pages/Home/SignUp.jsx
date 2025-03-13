@@ -25,6 +25,10 @@ function SignUp() {
       toast.error('Phone number must be at least 10 digits.');
       return;
     }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
 
     try {
       const response = await axios.post('http://localhost:8080/auth/createuser', {
