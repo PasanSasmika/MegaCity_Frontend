@@ -42,7 +42,7 @@ function Contact() {
               <div>
                 <h3 className="text-xl font-bold text-accent font-primary">Phone</h3>
                 <p className="text-gray-600 font-secondary">
-                  +628896-2220 | 02111144490
+                077-8987866 | 0776655434
                 </p>
               </div>
             </div>
