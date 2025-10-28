@@ -28,7 +28,7 @@ function BecomeDriver() {
   useEffect(() => {
     if(catStage== "loading"){
     axios
-      .get("http://localhost:8080/api/category")
+      .get("http://localhost:8081/api/category")
       .then((response) => {
         setCategories(response.data);
         setCatStage("loaded")
@@ -99,7 +99,7 @@ function BecomeDriver() {
     formData.append("pricePerKm", pricePerKm);
 
     try {
-      await axios.post("http://localhost:8080/auth/createdriver", formData, {
+      await axios.post("http://localhost:8081/auth/createdriver", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

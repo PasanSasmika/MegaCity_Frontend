@@ -11,7 +11,7 @@ function Category() {
     useEffect(() => {
         if (pageStatus === "loading") {
             axios
-                .get("http://localhost:8080/api/category")
+                .get("http://localhost:8081/api/category")
                 .then((response) => {
                     setCategories(response.data);
                     setPageStatus("loaded");
@@ -34,7 +34,7 @@ function Category() {
         }
       
         try {
-          await axios.delete(`http://localhost:8080/api/category/${catID}`, {
+          await axios.delete(`http://localhost:8081/api/category/${catID}`, {
             headers: {
               Authorization: `Bearer ${token}`, // Include the Bearer token in the request header
             },

@@ -26,7 +26,7 @@ function AdminHome() {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8080/auth/logout', null, {
+      await axios.post('http://localhost:8081/auth/logout', null, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

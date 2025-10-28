@@ -24,7 +24,7 @@ function CategoryAdd() {
 
     try {
       await axios.post(
-        'http://localhost:8080/api/category/createcategory', 
+        'http://localhost:8081/api/category/createcategory', 
         category, 
         {
           headers: { Authorization: `Bearer ${token}` }

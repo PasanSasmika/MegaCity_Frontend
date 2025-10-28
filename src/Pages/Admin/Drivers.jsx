@@ -20,7 +20,7 @@ function Drivers() {
 
   const fetchDrivers = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/auth/alldrivers");
+      const response = await axios.get("http://localhost:8081/auth/alldrivers");
       setDrivers(response.data);
     } catch (error) {
       console.error("Error fetching drivers:", error);
@@ -43,7 +43,7 @@ function Drivers() {
 
     try {
       await axios.post(
-        `http://localhost:8080/auth/setcredentials/${selectedDriverID}`,
+        `http://localhost:8081/auth/setcredentials/${selectedDriverID}`,
         null,
         {
           params: {
@@ -66,7 +66,7 @@ function Drivers() {
  const handleDeleteDriver = async (driverID) => {
     
      try {
-        await axios.delete(`http://localhost:8080/auth/deletedriver/${driverID}`);
+        await axios.delete(`http://localhost:8081/auth/deletedriver/${driverID}`);
        toast.success( "Driver deleted successfully!");
       
        await fetchDrivers();
