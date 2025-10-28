@@ -9,7 +9,7 @@ function Bookings() {
     if (pageStatus === 'loading') {
       const token = localStorage.getItem('token');
       axios
-        .get('http://localhost:8080/api/bookings/allbooking', {
+        .get('http://localhost:8081/api/bookings/allbooking', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

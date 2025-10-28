@@ -12,7 +12,7 @@ function AddAdmins() {
     // Fetch all admins
     const token = localStorage.getItem('token');
 
-    axios.get('http://localhost:8080/api/admin/alladmins', {
+    axios.get('http://localhost:8081/api/admin/alladmins', {
       headers: {
         'Authorization': `Bearer ${token}`,
       }

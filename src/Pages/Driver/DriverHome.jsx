@@ -33,7 +33,7 @@ function AdminDashboard() {
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/auth/setdriverStatues/${driverID}`,
+        `http://localhost:8081/auth/setdriverStatues/${driverID}`,
         null,
         {
           params: {
@@ -54,7 +54,7 @@ function AdminDashboard() {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8080/auth/logout', null, {
+      await axios.post('http://localhost:8081/auth/logout', null, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

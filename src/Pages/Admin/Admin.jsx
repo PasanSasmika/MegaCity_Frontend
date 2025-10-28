@@ -15,7 +15,7 @@ function Admin() {
         const token = localStorage.getItem('token');
 
         axios.post(
-            'http://localhost:8080/api/admin/createadmin', 
+            'http://localhost:8081/api/admin/createadmin', 
             {
                 userName,
                 password,

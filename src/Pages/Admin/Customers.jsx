@@ -13,7 +13,7 @@ function Customers() {
 
   const fetchCustomers = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/auth/allcustomers');
+      const response = await axios.get('http://localhost:8081/auth/allcustomers');
       if (Array.isArray(response.data)) {
         setCustomers(response.data);
       } else {
@@ -27,7 +27,7 @@ function Customers() {
 
   const handleDeleteDriver = async (customerId) => {
     try {
-      await axios.delete(`http://localhost:8080/auth/deletecustomer/${customerId}`);
+      await axios.delete(`http://localhost:8081/auth/deletecustomer/${customerId}`);
       toast.success("Customer deleted successfully!");
       fetchCustomers(); // Refetch customers after deletion
     } catch (error) {

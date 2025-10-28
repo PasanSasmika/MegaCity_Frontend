@@ -17,7 +17,7 @@ function CustomerHome() {
       useEffect(()=>{
         setTimeout(() => {
           setLoading(false)
-        }, 6200);
+        }, 1200);
       },[])
 
       useEffect(() => {

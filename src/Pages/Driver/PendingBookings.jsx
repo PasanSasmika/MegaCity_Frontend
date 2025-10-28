@@ -21,7 +21,7 @@ function PendingBookings() {
 
     setDriverID(driverIDFromStorage);
 
-    axios.get(`http://localhost:8080/api/bookings/driver/${driverIDFromStorage}`, {
+    axios.get(`http://localhost:8081/api/bookings/driver/${driverIDFromStorage}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       }
@@ -43,7 +43,7 @@ function PendingBookings() {
     const token = localStorage.getItem('token');
     try {
       // Fetch the current booking details
-      const response = await axios.get(`http://localhost:8080/api/bookings/${bookingId}`, {
+      const response = await axios.get(`http://localhost:8081/api/bookings/${bookingId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -55,7 +55,7 @@ function PendingBookings() {
       };
 
       // Send the update request
-      await axios.put(`http://localhost:8080/api/bookings/${bookingId}`, updatedBooking, {
+      await axios.put(`http://localhost:8081/api/bookings/${bookingId}`, updatedBooking, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -77,7 +77,7 @@ function PendingBookings() {
   const handleDelete = async (bookingId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:8080/api/bookings/${bookingId}`, {
+      await axios.delete(`http://localhost:8081/api/bookings/${bookingId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

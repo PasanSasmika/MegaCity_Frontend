@@ -31,7 +31,7 @@ function SignUp() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/auth/createuser', {
+      const response = await axios.post('http://localhost:8081/auth/createuser', {
         userName,
         email,
         password,

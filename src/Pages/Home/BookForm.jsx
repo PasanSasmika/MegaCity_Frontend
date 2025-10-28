@@ -226,7 +226,7 @@ const BookingFormWithMap = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post("http://localhost:8080/api/bookings", bookingData, {
+      const response = await axios.post("http://localhost:8081/api/bookings", bookingData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
